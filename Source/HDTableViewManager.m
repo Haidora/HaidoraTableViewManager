@@ -12,20 +12,19 @@
 @interface HDTableViewManager ()
 
 @property (nonatomic, strong) UINib *nib;
-@property (nonatomic, strong) Class cellClass;
 
 @end
 
 @implementation HDTableViewManager
 
-- (id)initWithItems:(NSMutableArray *)items
+- (id)initWithSections:(NSMutableArray *)items
              cellClass:(Class)cellClass
     configureCellBlock:(HDTableViewManagerCellConfigureBlock)cellConfigureBlock
 {
     self = [super init];
     if (self)
     {
-        _cellDatas = items;
+        _sectionDatas = items;
         _cellConfigureBlock = [cellConfigureBlock copy];
         _cellClass = cellClass;
     }
@@ -50,33 +49,50 @@
 
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return _cellDatas[indexPath.section][indexPath.row];
+    NSObject<HDTableViewSectionProtocol> *tableViewSection = _sectionDatas[indexPath.section];
+    NSMutableArray *rows = [tableViewSection sectionRows];
+    return rows[indexPath.row];
 }
 
 #pragma mark
 #pragma mark UITableView DataSource
 #pragma mark
-#pragma mark required
+#pragma mark UITableView DataSource required
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *items = _cellDatas[section];
-    return items.count;
+    NSInteger numberOfRows = 0;
+    NSObject<HDTableViewSectionProtocol> *tableViewSection = _sectionDatas[section];
+    if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+    {
+        numberOfRows = [tableViewSection sectionRows].count;
+    }
+    return numberOfRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     __block UITableViewCell *cell = nil;
+
     void (^loadCell)() = ^() {
       if (!cell && [_cellClass isSubclassOfClass:[UITableViewCell class]])
       {
-          cell = [_cellClass cellForTableView_HDTableViewManager:tableView
-                                                         fromNib:self.nib
-                                                       indexPath:indexPath];
+          if (self.nib)
+          {
+              cell = [_cellClass cellForTableView_HDTableViewManager:tableView
+                                                             fromNib:self.nib
+                                                           indexPath:indexPath];
+          }
+          else
+          {
+              cell = [_cellClass cellForTableView_HDTableViewManager:tableView
+                                                           withStyle:UITableViewCellStyleDefault
+                                                           indexPath:indexPath];
+          }
       }
     };
-
+    // if have datasource load datasource value
     if ([self.dataSource respondsToSelector:@selector(tableView:cellForRowAtIndexPath:)])
     {
         cell = [self.dataSource tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -86,6 +102,7 @@
     {
         loadCell();
     }
+    // config  cell
     if (self.cellConfigureBlock)
     {
         self.cellConfigureBlock(cell, [self itemAtIndexPath:indexPath], indexPath);
@@ -94,13 +111,53 @@
 }
 
 #pragma mark
-#pragma mark optional
+#pragma mark UITableView DataSource optional
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSInteger item = _cellDatas.count;
+    NSInteger item = _sectionDatas.count;
     return item;
 }
+
+#pragma mark
+#pragma mark UITableView DataSource optional Section Title
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *title = @"";
+    if ([self.dataSource respondsToSelector:@selector(tableView:titleForHeaderInSection:)])
+    {
+        title = [self.dataSource tableView:tableView titleForHeaderInSection:section];
+    }
+    else
+    {
+        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sectionDatas[section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        {
+            title = [tableViewSection titleForHeader];
+        }
+    }
+    return title;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    NSString *title = @"";
+    if ([self.dataSource respondsToSelector:@selector(tableView:titleForFooterInSection:)])
+    {
+        title = [self.dataSource tableView:tableView titleForFooterInSection:section];
+    }
+    else
+    {
+        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sectionDatas[section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        {
+            title = [tableViewSection titleForFooter];
+        }
+    }
+    return title;
+}
+
 
 #pragma mark
 #pragma mark optional Delete Action
@@ -116,11 +173,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView
-    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-     forRowAtIndexPath:(NSIndexPath *)indexPath
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.dataSource
-            respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)])
+         respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)])
     {
         [self.dataSource tableView:tableView
                 commitEditingStyle:editingStyle
@@ -131,8 +188,10 @@
         [tableView beginUpdates];
         if (editingStyle == UITableViewCellEditingStyleDelete)
         {
-            NSMutableArray *cells = _cellDatas[indexPath.section];
-            [cells removeObjectAtIndex:indexPath.row];
+            NSObject<HDTableViewSectionProtocol> *tableViewSection =
+            _sectionDatas[indexPath.section];
+            NSMutableArray *rows = [tableViewSection sectionRows];
+            [rows removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[ indexPath ]
                              withRowAnimation:UITableViewRowAnimationAutomatic];
         }
@@ -141,32 +200,20 @@
 }
 
 #pragma mark
-#pragma mark optional Title
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSString *title = @"";
-    if ([self.dataSource respondsToSelector:@selector(tableView:titleForHeaderInSection:)])
-    {
-        title = [self.dataSource tableView:tableView titleForHeaderInSection:section];
-    }
-    return title;
-}
-
-#pragma mark
 #pragma mark UITableViewDelegate
+#pragma mark
+#pragma mark UITableViewDelegate optional row height
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 0;
     if ([self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)])
     {
-        height = [self.delegate tableView:tableView heightForRowAtIndexPath:indexPath];
+        return [self.delegate tableView:tableView heightForRowAtIndexPath:indexPath];
     }
     else
     {
-        height = [self tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
+        return [self tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
     }
-    return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView
@@ -190,27 +237,108 @@
     return height;
 }
 
+#pragma mark
+#pragma mark UITableViewDelegate optional Section height
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    CGFloat height = 0;
     if ([self.delegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)])
     {
-        height = [self.delegate tableView:tableView heightForHeaderInSection:section];
+        return [self.delegate tableView:tableView heightForHeaderInSection:section];
+    }
+    else
+    {
+        return [self tableView:tableView estimatedHeightForHeaderInSection:section];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
+{
+    CGFloat height = 0;
+    if ([self.delegate respondsToSelector:@selector(tableView:estimatedHeightForHeaderInSection:)])
+    {
+        height = [self.delegate tableView:tableView estimatedHeightForHeaderInSection:section];
+    }
+    {
+        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sectionDatas[section];
+        if ([tableView conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        {
+            height = [tableViewSection heightForHeader];
+        }
     }
     return height;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if ([self.delegate respondsToSelector:@selector(tableView:viewForHeaderInSection:)])
+    if ([self.delegate respondsToSelector:@selector(tableView:heightForFooterInSection:)])
     {
-        return [self.delegate tableView:tableView viewForHeaderInSection:section];
+        return [self.delegate tableView:tableView heightForFooterInSection:section];
     }
     else
     {
-        return nil;
+        return [self tableView:tableView estimatedHeightForFooterInSection:section];
     }
 }
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section
+{
+    CGFloat height = 0;
+    if ([self.delegate respondsToSelector:@selector(tableView:estimatedHeightForFooterInSection:)])
+    {
+        height = [self.delegate tableView:tableView estimatedHeightForFooterInSection:section];
+    }
+    {
+        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sectionDatas[section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        {
+            height = [tableViewSection heightForFooter];
+        }
+    }
+    return height;
+}
+
+#pragma mark
+#pragma mark UITableViewDelegate optional Section View
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = nil;
+    if ([self.delegate respondsToSelector:@selector(tableView:viewForHeaderInSection:)])
+    {
+        view = [self.delegate tableView:tableView viewForHeaderInSection:section];
+    }
+    else
+    {
+        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sectionDatas[section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        {
+            view = [tableViewSection viewForHeader];
+        }
+    }
+    return view;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *view = nil;
+    if ([self.delegate respondsToSelector:@selector(tableView:viewForFooterInSection:)])
+    {
+        view = [self.delegate tableView:tableView viewForFooterInSection:section];
+    }
+    else
+    {
+        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sectionDatas[section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        {
+            view = [tableViewSection viewForFooter];
+        }
+    }
+    return view;
+}
+
+#pragma mark
+#pragma mark UITableViewDelegate optional Action
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

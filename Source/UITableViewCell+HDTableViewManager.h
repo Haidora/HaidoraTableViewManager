@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 @interface UITableViewCell (HDTableViewManager)
 
@@ -106,11 +107,11 @@
 /**
  *  when cell load
  */
-- (void)cellDidLoad_HDTableViewManager;
+- (void)cellDidLoad_HDTableViewManager __attribute__((objc_requires_super));
 
 /**
- *  when cell appear
+ *  when cell will appear
  */
-- (void)cellWillAppear_HDTableViewManager;
+- (void)cellWillAppear_HDTableViewManager __attribute__((objc_requires_super));
 
 @end

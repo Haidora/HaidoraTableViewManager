@@ -9,7 +9,22 @@
 #ifndef HaidoraTableViewManager_HaidoraTableViewManager_h
 #define HaidoraTableViewManager_HaidoraTableViewManager_h
 
+#if __has_include("UITableViewCell+HDTableViewManager.h")
+
 #import "UITableViewCell+HDTableViewManager.h"
+
+#endif
+
+#if __has_include("HDTableViewManager.h")
+
 #import "HDTableViewManager.h"
+
+#endif
+
+#if __has_include("HDTableViewSection.h")
+
+#import "HDTableViewSection.h"
+
+#endif
 
 #endif

@@ -18,6 +18,7 @@
 		AB28ECEA1A6E41D90008FA53 /* HDTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AB28ECE91A6E41D90008FA53 /* HDTableViewManager.m */; };
 		AB28ECF21A6E46DE0008FA53 /* TestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB28ECF11A6E46DE0008FA53 /* TestTableViewCell.m */; };
 		AB28ECF41A6E46E80008FA53 /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB28ECF31A6E46E80008FA53 /* TestTableViewCell.xib */; };
+		ABBD6CB61A84A28C00239B27 /* HDTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = ABBD6CB51A84A28C00239B27 /* HDTableViewSection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,9 @@
 		AB28ECF01A6E46DE0008FA53 /* TestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTableViewCell.h; sourceTree = "<group>"; };
 		AB28ECF11A6E46DE0008FA53 /* TestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableViewCell.m; sourceTree = "<group>"; };
 		AB28ECF31A6E46E80008FA53 /* TestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestTableViewCell.xib; sourceTree = "<group>"; };
+		ABBD6CB41A84A28C00239B27 /* HDTableViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDTableViewSection.h; sourceTree = "<group>"; };
+		ABBD6CB51A84A28C00239B27 /* HDTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDTableViewSection.m; sourceTree = "<group>"; };
+		ABBD6CB71A84A49200239B27 /* HDTableViewManagerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDTableViewManagerProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,10 +152,13 @@
 			isa = PBXGroup;
 			children = (
 				AB28ECE71A6E41B30008FA53 /* HaidoraTableViewManager.h */,
+				ABBD6CB71A84A49200239B27 /* HDTableViewManagerProtocol.h */,
 				AB28ECE41A6E399C0008FA53 /* UITableViewCell+HDTableViewManager.h */,
 				AB28ECE51A6E399C0008FA53 /* UITableViewCell+HDTableViewManager.m */,
 				AB28ECE81A6E41D90008FA53 /* HDTableViewManager.h */,
 				AB28ECE91A6E41D90008FA53 /* HDTableViewManager.m */,
+				ABBD6CB41A84A28C00239B27 /* HDTableViewSection.h */,
+				ABBD6CB51A84A28C00239B27 /* HDTableViewSection.m */,
 			);
 			name = Source;
 			path = ../../Source;
@@ -258,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABBD6CB61A84A28C00239B27 /* HDTableViewSection.m in Sources */,
 				AB28ECC41A6E383C0008FA53 /* ViewController.m in Sources */,
 				AB28ECF21A6E46DE0008FA53 /* TestTableViewCell.m in Sources */,
 				AB28ECE61A6E399C0008FA53 /* UITableViewCell+HDTableViewManager.m in Sources */,
@@ -456,6 +464,7 @@
 				AB28ECDD1A6E383C0008FA53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AB28ECDE1A6E383C0008FA53 /* Build configuration list for PBXNativeTarget "HaidoraTableViewManagerTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +473,7 @@
 				AB28ECE01A6E383C0008FA53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

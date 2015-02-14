@@ -10,7 +10,7 @@
 #import "HaidoraTableViewManager.h"
 #import "TestTableViewCell.h"
 
-@interface ViewController ()
+@interface ViewController () <HDTableViewManagerDataSource, HDTableViewManagerDelegate>
 
 @property (nonatomic, strong) HDTableViewManager *manager;
 
@@ -23,18 +23,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     NSMutableArray *datas = [NSMutableArray new];
-    NSMutableArray *cells = [NSMutableArray new];
-    [datas addObject:cells];
+    HDTableViewSection *section = [[HDTableViewSection alloc] init];
     for (int i = 0; i < 1000; i++)
     {
-        [cells addObject:@(i)];
+        [section.sectionRows addObject:@(i)];
     }
+    _manager = [[HDTableViewManager alloc] initWithSections:datas
+                                                  cellClass:[TestTableViewCell class]
+                                         configureCellBlock:^(id cell, id item, NSIndexPath *index){
 
-    _manager = [[HDTableViewManager alloc] initWithItems:datas
-                                               cellClass:[TestTableViewCell class]
-                                      configureCellBlock:^(id cell, id item, NSIndexPath *index){
+                                         }];
+    _manager.dataSource = self;
+    _manager.delegate = self;
 
-                                      }];
     self.tableView.dataSource = _manager;
     self.tableView.delegate = _manager;
 }

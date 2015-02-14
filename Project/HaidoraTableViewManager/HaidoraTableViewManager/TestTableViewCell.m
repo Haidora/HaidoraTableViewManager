@@ -18,11 +18,13 @@
 
 - (void)cellDidLoad_HDTableViewManager
 {
+    [super cellDidLoad_HDTableViewManager];
     NSLog(@"1");
 }
 
 - (void)cellWillAppear_HDTableViewManager
 {
+    [super cellWillAppear_HDTableViewManager];
     NSLog(@"%@", self.indexPath_HDTableViewManager);
 }
 
