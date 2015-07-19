@@ -1,0 +1,14 @@
+PODS:
+  - HaidoraTableViewManager (2.0.0)
+
+DEPENDENCIES:
+  - HaidoraTableViewManager (from `../`)
+
+EXTERNAL SOURCES:
+  HaidoraTableViewManager:
+    :path: ../
+
+SPEC CHECKSUMS:
+  HaidoraTableViewManager: 28b96637406a42c04c777e921e16d02bca97672e
+
+COCOAPODS: 0.37.2
