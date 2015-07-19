@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = "HaidoraTableViewManager"
   s.version          = "2.0.0"
-  s.summary          = "a wrapper for UITableViewDatasource and UITableViewDelegate."
+  s.summary          = "a wrapper for UITableView."
   s.description      = <<-DESC
-                      UITableViewDatasource和UITableViewDelegate的封装。
+                      a wrapper for UITableViewDatasource and UITableViewDelegate.
                        DESC
   s.homepage         = "https://github.com/Haidora/HaidoraTableViewManager"
   s.license          = 'MIT'
