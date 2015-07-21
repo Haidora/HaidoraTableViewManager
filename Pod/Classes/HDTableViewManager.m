@@ -8,6 +8,8 @@
 
 #import "HDTableViewManager.h"
 
+const CGFloat HDTableViewManagerAutomaticDimension = -7;
+
 @interface HDTableViewManager ()
 
 @property (nonatomic, strong) NSMutableDictionary *nibCache;
@@ -149,6 +151,18 @@
         cellClass = [UITableViewCell class];
     }
     return cellClass;
+}
+
+- (CGFloat)loadCellHeightWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 44.0;
+    Class cellClass = [self loadClassWith:indexPath];
+    if ([cellClass isSubclassOfClass:[UITableViewCell class]])
+    {
+        height = [cellClass hd_cellHeightForTableView:tableView
+                                              content:[self loadItemDataWith:indexPath]];
+    }
+    return height;
 }
 
 - (UITableViewCellStyle)loadCellStyleWith:(NSIndexPath *)indexPath
@@ -363,14 +377,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CGFloat height = HDTableViewManagerAutomaticDimension;
     if ([self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)])
     {
-        return [self.delegate tableView:tableView heightForRowAtIndexPath:indexPath];
+        height = [self.delegate tableView:tableView heightForRowAtIndexPath:indexPath];
     }
-    else
+    if (height == HDTableViewManagerAutomaticDimension)
     {
-        return [self tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
+        height = [self tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
     }
+    return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView
@@ -381,15 +397,9 @@
     {
         height = [self.delegate tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
     }
-    else
+    if (height == HDTableViewManagerAutomaticDimension)
     {
-        height = 44.0;
-        Class cellClass = [self loadClassWith:indexPath];
-        if ([cellClass isSubclassOfClass:[UITableViewCell class]])
-        {
-            height = [cellClass hd_cellHeightForTableView:tableView
-                                                  content:[self loadItemDataWith:indexPath]];
-        }
+        height = [self loadCellHeightWith:tableView indexPath:indexPath];
     }
     return height;
 }

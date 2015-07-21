@@ -89,4 +89,17 @@
     return UITableViewCellEditingStyleDelete;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView
+    estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0)
+    {
+        return HDTableViewManagerAutomaticDimension;
+    }
+    else
+    {
+        return 100;
+    }
+}
+
 @end

@@ -14,6 +14,17 @@
 
 typedef void (^HDTableViewManagerCellConfigure)(id cell, id itemData, NSIndexPath *indexPath);
 
+/**
+ *
+ 如果HDTableViewManagerDelegate中cell高度返回为HDTableViewManagerAutomaticDimension,则加载UITableViewCell中的高度配置(hd_cellHeightForTableView:content:)
+ *
+ *- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+ *
+ *- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath
+ *)indexPath
+ */
+extern const CGFloat HDTableViewManagerAutomaticDimension;
+
 #pragma mark
 #pragma mark HDTableViewSectionProtocol
 /**
