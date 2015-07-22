@@ -392,7 +392,7 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 - (CGFloat)tableView:(UITableView *)tableView
     estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 0;
+    CGFloat height = HDTableViewManagerAutomaticDimension;
     if ([self.delegate respondsToSelector:@selector(tableView:estimatedHeightForRowAtIndexPath:)])
     {
         height = [self.delegate tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
