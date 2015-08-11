@@ -22,7 +22,12 @@
 @property (nonatomic, strong, readwrite) NSMutableArray *sections;
 
 /**
- *  <UITableViewDataSource, UITableViewDelegate>,默认为nil
+ *  <UITableViewDataSource>,默认为nil
+ */
+@property (nonatomic, weak, readwrite) id<HDTableViewManagerDataSource> dataSource;
+
+/**
+ *  <UITableViewDelegate>,默认为nil
  */
 @property (nonatomic, weak, readwrite) id<HDTableViewManagerDelegate> delegate;
 

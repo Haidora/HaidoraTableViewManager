@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2tv-vS-w30">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qSG-Le-sOq">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="nZN-zv-1zY">
+        <scene sceneID="QfE-Oo-wQ9">
             <objects>
-                <tableViewController id="2tv-vS-w30" customClass="HDViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="c2f-ed-Xht">
+                <viewController id="qSG-Le-sOq" customClass="HDViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y8Y-lK-prB"/>
+                        <viewControllerLayoutGuide type="bottom" id="B6U-0d-Jgi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4lx-rm-fCA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="2tv-vS-w30" id="lyH-zZ-akD"/>
-                            <outlet property="delegate" destination="2tv-vS-w30" id="2Wq-0Y-n7W"/>
-                        </connections>
-                    </tableView>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rt0-u4-QeD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X98-uW-TEH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="415"/>
+            <point key="canvasLocation" x="744" y="4"/>
         </scene>
     </scenes>
 </document>

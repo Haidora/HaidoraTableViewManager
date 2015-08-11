@@ -291,9 +291,9 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 {
     UITableViewCell *cell = nil;
     // if have datasource then load datasource value
-    if ([self.delegate respondsToSelector:@selector(tableView:cellForRowAtIndexPath:)])
+    if ([self.dataSource respondsToSelector:@selector(tableView:cellForRowAtIndexPath:)])
     {
-        cell = [self.delegate tableView:tableView cellForRowAtIndexPath:indexPath];
+        cell = [self.dataSource tableView:tableView cellForRowAtIndexPath:indexPath];
     }
     // check cell is load;(when datasource is uitableviewcontroller)
     if (!cell)
@@ -324,9 +324,9 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString *title = @"";
-    if ([self.delegate respondsToSelector:@selector(tableView:titleForHeaderInSection:)])
+    if ([self.dataSource respondsToSelector:@selector(tableView:titleForHeaderInSection:)])
     {
-        title = [self.delegate tableView:tableView titleForHeaderInSection:section];
+        title = [self.dataSource tableView:tableView titleForHeaderInSection:section];
     }
     else
     {
@@ -342,9 +342,9 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     NSString *title = @"";
-    if ([self.delegate respondsToSelector:@selector(tableView:titleForFooterInSection:)])
+    if ([self.dataSource respondsToSelector:@selector(tableView:titleForFooterInSection:)])
     {
-        title = [self.delegate tableView:tableView titleForFooterInSection:section];
+        title = [self.dataSource tableView:tableView titleForFooterInSection:section];
     }
     else
     {
@@ -363,9 +363,9 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BOOL canEdit = NO;
-    if ([self.delegate respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)])
+    if ([self.dataSource respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)])
     {
-        canEdit = [self.delegate tableView:tableView canEditRowAtIndexPath:indexPath];
+        canEdit = [self.dataSource tableView:tableView canEditRowAtIndexPath:indexPath];
     }
     return canEdit;
 }
@@ -517,12 +517,12 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
     commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
      forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.delegate
+    if ([self.dataSource
             respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)])
     {
-        [self.delegate tableView:tableView
-              commitEditingStyle:editingStyle
-               forRowAtIndexPath:indexPath];
+        [self.dataSource tableView:tableView
+                commitEditingStyle:editingStyle
+                 forRowAtIndexPath:indexPath];
     }
     else
     {

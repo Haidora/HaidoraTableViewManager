@@ -13,6 +13,7 @@
 @interface HDViewController () <HDTableViewManagerDelegate>
 
 @property (nonatomic, strong) HDTableViewManager *manager;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -21,7 +22,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.tableView.autoresizingMask =
+        UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.tableView.tableFooterView = [[UIView alloc] init];
+    [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view, typically from a nib.
     _manager = [HDTableViewManager manager];
     _manager.delegate = self;

@@ -132,14 +132,11 @@ extern const CGFloat HDTableViewManagerAutomaticDimension;
 #pragma mark
 #pragma mark HDTableViewManagerDelegate
 
-@protocol HDTableViewManagerDelegate <UITableViewDataSource, UITableViewDelegate>
+@protocol HDTableViewManagerDataSource <UITableViewDataSource>
 
-@optional
+@end
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
-
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+@protocol HDTableViewManagerDelegate <UITableViewDelegate>
 
 @end
 
