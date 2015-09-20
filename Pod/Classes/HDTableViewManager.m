@@ -245,7 +245,8 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
         cell = [cellClass hd_cellForTableView:tableView
                                       fromNib:nib
                                    identifier:cellellIdentifier
-                                    indexPath:indexPath];
+                                    indexPath:indexPath
+                                         item:[self itemAtIndexPath:indexPath]];
     }
     else
     {
@@ -255,7 +256,8 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
             cell = [cellClass hd_cellForTableView:tableView
                                         withStyle:cellStyle
                                        identifier:cellellIdentifier
-                                        indexPath:indexPath];
+                                        indexPath:indexPath
+                                             item:[self itemAtIndexPath:indexPath]];
         }
         else
         {

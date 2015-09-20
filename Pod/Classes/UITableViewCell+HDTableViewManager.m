@@ -11,6 +11,7 @@
 
 static char *kHD_tableView = "kHD_tableView";
 static char *kHD_indexPath = "kHD_indexPath";
+static char *kHD_item = "kHD_item";
 
 @interface UITableViewCell (HDTableViewManagerPrivate)
 
@@ -23,6 +24,7 @@ static char *kHD_indexPath = "kHD_indexPath";
 
 @dynamic hd_tableView;
 @dynamic hd_indexPath;
+@dynamic hd_item;
 
 #pragma mark
 #pragma mark Cell Config
@@ -100,6 +102,19 @@ static char *kHD_indexPath = "kHD_indexPath";
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath
 {
+    return [self hd_cellForTableView:tableView
+                           withStyle:style
+                          identifier:identifier
+                           indexPath:indexPath
+                                item:nil];
+}
+
++ (id)hd_cellForTableView:(UITableView *)tableView
+                withStyle:(UITableViewCellStyle)style
+               identifier:(NSString *)identifier
+                indexPath:(NSIndexPath *)indexPath
+                     item:(id)item
+{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil)
     {
@@ -108,6 +123,7 @@ static char *kHD_indexPath = "kHD_indexPath";
     }
     cell.hd_tableView = tableView;
     cell.hd_indexPath = indexPath;
+    cell.hd_item = item;
     [cell hd_cellWillAppear];
     return cell;
 }
@@ -127,6 +143,19 @@ static char *kHD_indexPath = "kHD_indexPath";
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath
 {
+    return [self hd_cellForTableView:tableView
+                             fromNib:nib
+                          identifier:identifier
+                           indexPath:indexPath
+                                item:nil];
+}
+
++ (id)hd_cellForTableView:(UITableView *)tableView
+                  fromNib:(UINib *)nib
+               identifier:(NSString *)identifier
+                indexPath:(NSIndexPath *)indexPath
+                     item:(id)item
+{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil)
     {
@@ -143,6 +172,7 @@ static char *kHD_indexPath = "kHD_indexPath";
     }
     cell.hd_tableView = tableView;
     cell.hd_indexPath = indexPath;
+    cell.hd_item = item;
     [cell hd_cellWillAppear];
     return cell;
 }
@@ -179,6 +209,16 @@ static char *kHD_indexPath = "kHD_indexPath";
 - (NSIndexPath *)hd_indexPath
 {
     return objc_getAssociatedObject(self, &kHD_indexPath);
+}
+
+- (void)setHd_item:(id)hd_item
+{
+    objc_setAssociatedObject(self, &kHD_item, hd_item, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (id)hd_item
+{
+    return objc_getAssociatedObject(self, &kHD_item);
 }
 
 @end

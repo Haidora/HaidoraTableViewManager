@@ -13,6 +13,7 @@
 
 @property (nonatomic, weak, readwrite) UITableView *hd_tableView;
 @property (nonatomic, strong, readwrite) NSIndexPath *hd_indexPath;
+@property (nonatomic, weak, readwrite) id hd_item;
 
 #pragma mark
 #pragma mark Cell Config
@@ -71,6 +72,12 @@
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath;
 
++ (id)hd_cellForTableView:(UITableView *)tableView
+                withStyle:(UITableViewCellStyle)style
+               identifier:(NSString *)identifier
+                indexPath:(NSIndexPath *)indexPath
+                     item:(id)item;
+
 /**
  *  根据nib创建cell
  */
@@ -85,6 +92,12 @@
                   fromNib:(UINib *)nib
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath;
+
++ (id)hd_cellForTableView:(UITableView *)tableView
+                  fromNib:(UINib *)nib
+               identifier:(NSString *)identifier
+                indexPath:(NSIndexPath *)indexPath
+                     item:(id)item;
 
 #pragma mark
 #pragma mark Life Cycle
