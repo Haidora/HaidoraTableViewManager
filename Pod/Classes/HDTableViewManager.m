@@ -269,6 +269,54 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 }
 
 #pragma mark
+#pragma mark Forwarding DataSource / Delegate
+//@link http://blog.scottlogic.com/2012/11/19/a-multicast-delegate-pattern-for-ios-controls.html
+
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+    if ([super respondsToSelector:aSelector])
+    {
+        return YES;
+    }
+    else if ([self.dataSource respondsToSelector:aSelector])
+    {
+        return YES;
+    }
+    else if ([self.delegate respondsToSelector:aSelector])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (id)forwardingTargetForSelector:(SEL)aSelector
+{
+    if ([self.dataSource respondsToSelector:aSelector])
+    {
+        return self.dataSource;
+    }
+    else if ([self.delegate respondsToSelector:aSelector])
+    {
+        return self.delegate;
+    }
+    else
+    {
+        // never call
+        return nil;
+    }
+}
+
+- (void)doesNotRecognizeSelector:(SEL)aSelector
+{
+    // never call
+    NSLog(@"%@_doesNotRecognizeSelector:%@", NSStringFromClass([self class]),
+          NSStringFromSelector(aSelector));
+}
+
+#pragma mark
 #pragma mark UITableViewDataSource
 
 #pragma mark UITableViewDataSource required
