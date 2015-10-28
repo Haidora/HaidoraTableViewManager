@@ -60,19 +60,19 @@
 /**
  *  根据style创建cell
  */
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                 withStyle:(UITableViewCellStyle)style
                 indexPath:(NSIndexPath *)indexPath;
 
 /**
  *  根据style和创建cell
  */
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                 withStyle:(UITableViewCellStyle)style
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath;
 
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                 withStyle:(UITableViewCellStyle)style
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath
@@ -81,19 +81,19 @@
 /**
  *  根据nib创建cell
  */
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                   fromNib:(UINib *)nib
                 indexPath:(NSIndexPath *)indexPath;
 
 /**
  *  根据nib和identifier创建cell
  */
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                   fromNib:(UINib *)nib
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath;
 
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                   fromNib:(UINib *)nib
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath

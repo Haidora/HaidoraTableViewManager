@@ -69,7 +69,7 @@ static char *kHD_item = "kHD_item";
 #pragma mark
 #pragma mark Load Cell
 
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                 withStyle:(UITableViewCellStyle)style
                 indexPath:(NSIndexPath *)indexPath
 {
@@ -97,7 +97,7 @@ static char *kHD_item = "kHD_item";
                            indexPath:indexPath];
 }
 
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                 withStyle:(UITableViewCellStyle)style
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath
@@ -109,7 +109,7 @@ static char *kHD_item = "kHD_item";
                                 item:nil];
 }
 
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                 withStyle:(UITableViewCellStyle)style
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath
@@ -128,7 +128,7 @@ static char *kHD_item = "kHD_item";
     return cell;
 }
 
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                   fromNib:(UINib *)nib
                 indexPath:(NSIndexPath *)indexPath
 {
@@ -138,7 +138,7 @@ static char *kHD_item = "kHD_item";
                            indexPath:indexPath];
 }
 
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                   fromNib:(UINib *)nib
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath
@@ -150,7 +150,7 @@ static char *kHD_item = "kHD_item";
                                 item:nil];
 }
 
-+ (id)hd_cellForTableView:(UITableView *)tableView
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
                   fromNib:(UINib *)nib
                identifier:(NSString *)identifier
                 indexPath:(NSIndexPath *)indexPath

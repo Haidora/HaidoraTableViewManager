@@ -16,9 +16,9 @@
 
 @implementation HDTableViewSection
 
-+ (id)section
++ (instancetype)section
 {
-    return [[HDTableViewSection alloc] init];
+    return [[self alloc] init];
 }
 
 #pragma mark

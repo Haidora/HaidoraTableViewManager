@@ -48,11 +48,11 @@
  */
 @property (nonatomic, copy, readwrite) HDTableViewManagerCellConfigure cellConfigure;
 
-- (id)initWithSections:(NSMutableArray *)sections
-             cellClass:(Class)cellClass
-             cellStyle:(UITableViewCellStyle)cellStyle
-    configureCellBlock:(HDTableViewManagerCellConfigure)cellConfigure
-              delegate:(id<HDTableViewManagerDelegate>)delegate;
+- (instancetype)initWithSections:(NSMutableArray *)sections
+                       cellClass:(Class)cellClass
+                       cellStyle:(UITableViewCellStyle)cellStyle
+              configureCellBlock:(HDTableViewManagerCellConfigure)cellConfigure
+                        delegate:(id<HDTableViewManagerDelegate>)delegate;
 
 /**
 *  创建manager
@@ -65,7 +65,7 @@
 *
 *  @return
 */
-+ (id)manager;
++ (instancetype)manager;
 
 /**
  *  获取指定indexPath的item
@@ -87,7 +87,7 @@
 /**
  *  manager or
  *
- - (id)initWithSections:(NSMutableArray *)sections
+ - (instancetype)initWithSections:(NSMutableArray *)sections
 
  cellClass:(Class)cellClass
 
@@ -98,8 +98,9 @@
  delegate:(id<HDTableViewManagerDelegate>)delegate
 
  */
-- (id)initWithSections:(NSMutableArray *)sections
-             cellClass:(Class)cellClass
-    configureCellBlock:(HDTableViewManagerCellConfigure)cellConfigure DEPRECATED_ATTRIBUTE;
+- (instancetype)initWithSections:(NSMutableArray *)sections
+                       cellClass:(Class)cellClass
+              configureCellBlock:(HDTableViewManagerCellConfigure)cellConfigure
+    DEPRECATED_ATTRIBUTE;
 
 @end

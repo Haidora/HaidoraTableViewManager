@@ -21,11 +21,11 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 #pragma mark
 #pragma mark Init
 
-- (id)initWithSections:(NSMutableArray *)sections
-             cellClass:(Class)cellClass
-             cellStyle:(UITableViewCellStyle)cellStyle
-    configureCellBlock:(HDTableViewManagerCellConfigure)cellConfigure
-              delegate:(id<HDTableViewManagerDelegate>)delegate
+- (instancetype)initWithSections:(NSMutableArray *)sections
+                       cellClass:(Class)cellClass
+                       cellStyle:(UITableViewCellStyle)cellStyle
+              configureCellBlock:(HDTableViewManagerCellConfigure)cellConfigure
+                        delegate:(id<HDTableViewManagerDelegate>)delegate
 {
     self = [self init];
     if (self)
@@ -39,7 +39,7 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
     return self;
 }
 
-+ (id)manager
++ (instancetype)manager
 {
     HDTableViewManager *manager =
         [[HDTableViewManager alloc] initWithSections:[NSMutableArray array]
@@ -629,9 +629,9 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 
 @implementation HDTableViewManager (Deprecated)
 
-- (id)initWithSections:(NSMutableArray *)sections
-             cellClass:(Class)cellClass
-    configureCellBlock:(HDTableViewManagerCellConfigure)cellConfigure
+- (instancetype)initWithSections:(NSMutableArray *)sections
+                       cellClass:(Class)cellClass
+              configureCellBlock:(HDTableViewManagerCellConfigure)cellConfigure
 {
     return [self initWithSections:sections
                         cellClass:cellClass

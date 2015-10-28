@@ -10,9 +10,9 @@
 
 @implementation HDTableViewItem
 
-+ (id)item
++ (instancetype)item
 {
-    return [[HDTableViewItem alloc] init];
+    return [[self alloc] init];
 }
 
 @end

@@ -36,6 +36,6 @@
  */
 @property (nonatomic, strong, readwrite) id item;
 
-+ (id)item;
++ (instancetype)item;
 
 @end

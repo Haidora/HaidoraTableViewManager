@@ -67,6 +67,6 @@
  */
 @property (nonatomic, strong, readonly) NSMutableArray *items;
 
-+ (id)section;
++ (instancetype)section;
 
 @end
