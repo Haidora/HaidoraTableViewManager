@@ -278,11 +278,11 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
     {
         return YES;
     }
-    else if ([self.dataSource respondsToSelector:aSelector])
+    else if (((id)self != (id)self.dataSource) && [self.dataSource respondsToSelector:aSelector])
     {
         return YES;
     }
-    else if ([self.delegate respondsToSelector:aSelector])
+    else if (((id)self != (id)self.delegate) && [self.delegate respondsToSelector:aSelector])
     {
         return YES;
     }
@@ -294,11 +294,11 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 
 - (id)forwardingTargetForSelector:(SEL)aSelector
 {
-    if ([self.dataSource respondsToSelector:aSelector])
+    if (((id)self != (id)self.dataSource) && [self.dataSource respondsToSelector:aSelector])
     {
         return self.dataSource;
     }
-    else if ([self.delegate respondsToSelector:aSelector])
+    else if (((id)self != (id)self.delegate) && [self.delegate respondsToSelector:aSelector])
     {
         return self.delegate;
     }
