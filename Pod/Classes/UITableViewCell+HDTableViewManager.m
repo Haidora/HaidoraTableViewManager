@@ -70,8 +70,8 @@ static char *kHD_item = "kHD_item";
 #pragma mark Load Cell
 
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                withStyle:(UITableViewCellStyle)style
-                indexPath:(NSIndexPath *)indexPath
+                          withStyle:(UITableViewCellStyle)style
+                          indexPath:(NSIndexPath *)indexPath
 {
     NSString *cellIdentifier = @"HABTableViewCellSystem";
     switch (style)
@@ -98,9 +98,9 @@ static char *kHD_item = "kHD_item";
 }
 
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                withStyle:(UITableViewCellStyle)style
-               identifier:(NSString *)identifier
-                indexPath:(NSIndexPath *)indexPath
+                          withStyle:(UITableViewCellStyle)style
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
 {
     return [self hd_cellForTableView:tableView
                            withStyle:style
@@ -110,27 +110,54 @@ static char *kHD_item = "kHD_item";
 }
 
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                withStyle:(UITableViewCellStyle)style
-               identifier:(NSString *)identifier
-                indexPath:(NSIndexPath *)indexPath
-                     item:(id)item
+                          withStyle:(UITableViewCellStyle)style
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item
+{
+    return [self hd_cellForTableView:tableView
+                           withStyle:style
+                          identifier:identifier
+                           indexPath:indexPath
+                                item:item
+                      didLoadHandler:nil
+                   willAppearHandler:nil];
+}
+
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
+                          withStyle:(UITableViewCellStyle)style
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item
+                     didLoadHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))didLoadHandler
+                  willAppearHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))willAppearHandler
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil)
     {
         cell = [[[self class] alloc] initWithStyle:style reuseIdentifier:identifier];
         [cell hd_cellDidLoad];
+        if (didLoadHandler)
+        {
+            didLoadHandler(tableView, cell, indexPath);
+        }
     }
     cell.hd_tableView = tableView;
     cell.hd_indexPath = indexPath;
     cell.hd_item = item;
     [cell hd_cellWillAppear];
+    if (willAppearHandler)
+    {
+        willAppearHandler(tableView, cell, indexPath);
+    }
     return cell;
 }
 
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                  fromNib:(UINib *)nib
-                indexPath:(NSIndexPath *)indexPath
+                            fromNib:(UINib *)nib
+                          indexPath:(NSIndexPath *)indexPath
 {
     return [self hd_cellForTableView:tableView
                              fromNib:nib
@@ -139,9 +166,9 @@ static char *kHD_item = "kHD_item";
 }
 
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                  fromNib:(UINib *)nib
-               identifier:(NSString *)identifier
-                indexPath:(NSIndexPath *)indexPath
+                            fromNib:(UINib *)nib
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
 {
     return [self hd_cellForTableView:tableView
                              fromNib:nib
@@ -151,10 +178,29 @@ static char *kHD_item = "kHD_item";
 }
 
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                  fromNib:(UINib *)nib
-               identifier:(NSString *)identifier
-                indexPath:(NSIndexPath *)indexPath
-                     item:(id)item
+                            fromNib:(UINib *)nib
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item
+{
+    return [self hd_cellForTableView:tableView
+                             fromNib:nib
+                          identifier:identifier
+                           indexPath:indexPath
+                                item:item
+                      didLoadHandler:nil
+                   willAppearHandler:nil];
+}
+
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
+                            fromNib:(UINib *)nib
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item
+                     didLoadHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))didLoadHandler
+                  willAppearHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))willAppearHandler
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil)
@@ -166,6 +212,10 @@ static char *kHD_item = "kHD_item";
             {
                 cell = nibCell;
                 [cell hd_cellDidLoad];
+                if (didLoadHandler)
+                {
+                    didLoadHandler(tableView, cell, indexPath);
+                }
                 break;
             }
         }
@@ -174,6 +224,10 @@ static char *kHD_item = "kHD_item";
     cell.hd_indexPath = indexPath;
     cell.hd_item = item;
     [cell hd_cellWillAppear];
+    if (willAppearHandler)
+    {
+        willAppearHandler(tableView, cell, indexPath);
+    }
     return cell;
 }
 

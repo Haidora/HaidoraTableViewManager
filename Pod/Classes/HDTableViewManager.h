@@ -46,12 +46,26 @@
 /**
  *  UITableViewCell数据配置回调
  */
-@property (nonatomic, copy, readwrite) HDTableViewManagerCellConfigure cellConfigure;
+@property (nonatomic, copy, readwrite) void (^cellConfigure)
+    (id cell, id itemData, NSIndexPath *indexPath);
+
+/**
+ *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellDidLoad,可同时存在)
+ */
+@property (nonatomic, copy, readwrite) void (^cellDidLoadHandler)
+    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+
+/**
+ *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellWillAppear,可同时存在)
+ */
+@property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
+    (UITableView *tableView, id cell, NSIndexPath *indexPath);
 
 - (instancetype)initWithSections:(NSMutableArray *)sections
                        cellClass:(Class)cellClass
                        cellStyle:(UITableViewCellStyle)cellStyle
-              configureCellBlock:(HDTableViewManagerCellConfigure)cellConfigure
+              configureCellBlock:(void (^)(id cell, id itemData,
+                                           NSIndexPath *indexPath))cellConfigure
                         delegate:(id<HDTableViewManagerDelegate>)delegate;
 
 /**

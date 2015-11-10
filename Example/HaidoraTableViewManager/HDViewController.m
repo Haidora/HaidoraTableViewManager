@@ -29,9 +29,24 @@
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view, typically from a nib.
     _manager = [HDTableViewManager manager];
+    _manager.cellDidLoadHandler =
+        ^(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath) {
+          if (indexPath.row % 2)
+          {
+              cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+          }
+          else
+          {
+              cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+          }
+        };
+    _manager.cellWillAppearHandler =
+        ^(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath) {
+          NSLog(@"%@-%@", indexPath, cell);
+        };
     _manager.delegate = self;
     //普通cell
-    HDTableViewManagerCellConfigure cellConSection =
+    void (^cellConSection)(id cell, id itemData, NSIndexPath *indexPath) =
         ^(UITableViewCell *cell, id itemData, NSIndexPath *indexPath) {
           cell.textLabel.text =
               [NSString stringWithFormat:@"index-%@-%@", @(indexPath.section), @(indexPath.row)];
@@ -40,8 +55,23 @@
         };
 
     HDTableViewSection *section1 = [HDTableViewSection section];
+    section1.cellDidLoadHandler =
+        ^(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath) {
+          if (indexPath.row % 2)
+          {
+              cell.accessoryType = UITableViewCellAccessoryDetailButton;
+          }
+          else
+          {
+              cell.accessoryType = UITableViewCellAccessoryCheckmark;
+          }
+        };
     section1.titleForHeader = @"系统自带的cell";
     HDTableViewItem *item1 = [HDTableViewItem item];
+    item1.cellDidLoadHandler =
+        ^(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath) {
+          cell.accessoryType = UITableViewCellAccessoryNone;
+        };
     item1.cellConfigure = cellConSection;
     [section1.items addObject:item1];
     HDTableViewItem *item2 = [HDTableViewItem item];

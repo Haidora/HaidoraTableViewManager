@@ -61,43 +61,63 @@
  *  根据style创建cell
  */
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                withStyle:(UITableViewCellStyle)style
-                indexPath:(NSIndexPath *)indexPath;
+                          withStyle:(UITableViewCellStyle)style
+                          indexPath:(NSIndexPath *)indexPath;
 
 /**
  *  根据style和创建cell
  */
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                withStyle:(UITableViewCellStyle)style
-               identifier:(NSString *)identifier
-                indexPath:(NSIndexPath *)indexPath;
+                          withStyle:(UITableViewCellStyle)style
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath;
 
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                withStyle:(UITableViewCellStyle)style
-               identifier:(NSString *)identifier
-                indexPath:(NSIndexPath *)indexPath
-                     item:(id)item;
+                          withStyle:(UITableViewCellStyle)style
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item;
+
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
+                          withStyle:(UITableViewCellStyle)style
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item
+                     didLoadHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))didLoadHandler
+                  willAppearHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))willAppearHandler;
 
 /**
  *  根据nib创建cell
  */
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                  fromNib:(UINib *)nib
-                indexPath:(NSIndexPath *)indexPath;
+                            fromNib:(UINib *)nib
+                          indexPath:(NSIndexPath *)indexPath;
 
 /**
  *  根据nib和identifier创建cell
  */
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                  fromNib:(UINib *)nib
-               identifier:(NSString *)identifier
-                indexPath:(NSIndexPath *)indexPath;
+                            fromNib:(UINib *)nib
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath;
 
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
-                  fromNib:(UINib *)nib
-               identifier:(NSString *)identifier
-                indexPath:(NSIndexPath *)indexPath
-                     item:(id)item;
+                            fromNib:(UINib *)nib
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item;
+
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
+                            fromNib:(UINib *)nib
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item
+                     didLoadHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))didLoadHandler
+                  willAppearHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))willAppearHandler;
 
 #pragma mark
 #pragma mark Life Cycle

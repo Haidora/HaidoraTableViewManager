@@ -12,7 +12,8 @@
 #pragma mark
 #pragma mark Config
 
-typedef void (^HDTableViewManagerCellConfigure)(id cell, id itemData, NSIndexPath *indexPath);
+typedef void (^HDTableViewManagerCellConfigure)(id cell, id itemData,
+                                                NSIndexPath *indexPath) DEPRECATED_ATTRIBUTE;
 
 /**
  *
@@ -83,7 +84,20 @@ extern const CGFloat HDTableViewManagerAutomaticDimension;
 /**
  *  UITableViewCell数据配置回调
  */
-@property (nonatomic, copy, readwrite) HDTableViewManagerCellConfigure cellConfigure;
+@property (nonatomic, copy, readwrite) void (^cellConfigure)
+    (id cell, id itemData, NSIndexPath *indexPath);
+
+/**
+ *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellDidLoad,可同时存在)
+ */
+@property (nonatomic, copy, readwrite) void (^cellDidLoadHandler)
+    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+
+/**
+ *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellWillAppear,可同时存在)
+ */
+@property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
+    (UITableView *tableView, id cell, NSIndexPath *indexPath);
 
 /**
  *  section下面的cell数据模型
@@ -115,7 +129,20 @@ extern const CGFloat HDTableViewManagerAutomaticDimension;
 /**
  *  UITableViewCell数据配置回调
  */
-@property (nonatomic, copy, readwrite) HDTableViewManagerCellConfigure cellConfigure;
+@property (nonatomic, copy, readwrite) void (^cellConfigure)
+    (id cell, id itemData, NSIndexPath *indexPath);
+
+/**
+ *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellDidLoad,可同时存在)
+ */
+@property (nonatomic, copy, readwrite) void (^cellDidLoadHandler)
+    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+
+/**
+ *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellWillAppear,可同时存在)
+ */
+@property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
+    (UITableView *tableView, id cell, NSIndexPath *indexPath);
 
 /**
  *  创建cell时reusableIdentifier

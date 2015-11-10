@@ -24,7 +24,8 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 - (instancetype)initWithSections:(NSMutableArray *)sections
                        cellClass:(Class)cellClass
                        cellStyle:(UITableViewCellStyle)cellStyle
-              configureCellBlock:(HDTableViewManagerCellConfigure)cellConfigure
+              configureCellBlock:(void (^)(id cell, id itemData,
+                                           NSIndexPath *indexPath))cellConfigure
                         delegate:(id<HDTableViewManagerDelegate>)delegate
 {
     self = [self init];
@@ -72,7 +73,8 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
     CGFloat height = 0;
 
     UITableViewCell *cell = [self loadCellWith:tableView indexPath:indexPath];
-    HDTableViewManagerCellConfigure cellConfigure = [self loadCellConfigureWith:indexPath];
+    void (^cellConfigure)(id cell, id itemData, NSIndexPath *indexPath) =
+        [self loadCellConfigureWith:indexPath];
     if (cellConfigure)
     {
         cellConfigure(cell, [self loadItemDataWith:indexPath], indexPath);
@@ -192,9 +194,10 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
     return cellStyle;
 }
 
-- (HDTableViewManagerCellConfigure)loadCellConfigureWith:(NSIndexPath *)indexPath
+- (void (^)(id cell, id itemData,
+            NSIndexPath *indexPath))loadCellConfigureWith:(NSIndexPath *)indexPath
 {
-    HDTableViewManagerCellConfigure cellConfigure = nil;
+    void (^cellConfigure)(id cell, id itemData, NSIndexPath *indexPath) = nil;
     //     1.load Item config
     NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
     if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
@@ -216,6 +219,60 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
         cellConfigure = _cellConfigure;
     }
     return cellConfigure;
+}
+
+- (void (^)(UITableView *tableView, id cell,
+            NSIndexPath *indexPath))loadCellDidLoadHandlerWith:(NSIndexPath *)indexPath
+{
+    void (^cellDidLoadHandler)(UITableView *tableView, id cell, NSIndexPath *indexPath) = nil;
+    //     1.load Item config
+    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
+    {
+        cellDidLoadHandler = tableViewItem.cellDidLoadHandler;
+    }
+    if (!cellDidLoadHandler)
+    {
+        // 2.load Section config
+        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        {
+            cellDidLoadHandler = tableViewSection.cellDidLoadHandler;
+        }
+    }
+    if (!cellDidLoadHandler)
+    {
+        // 3.load Manager config
+        cellDidLoadHandler = _cellDidLoadHandler;
+    }
+    return cellDidLoadHandler;
+}
+
+- (void (^)(UITableView *tableView, id cell,
+            NSIndexPath *indexPath))loadCellWillAppearHandlerWith:(NSIndexPath *)indexPath
+{
+    void (^cellWillAppearHandler)(UITableView *tableView, id cell, NSIndexPath *indexPath) = nil;
+    //     1.load Item config
+    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
+    {
+        cellWillAppearHandler = tableViewItem.cellWillAppearHandler;
+    }
+    if (!cellWillAppearHandler)
+    {
+        // 2.load Section config
+        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        {
+            cellWillAppearHandler = tableViewSection.cellWillAppearHandler;
+        }
+    }
+    if (!cellWillAppearHandler)
+    {
+        // 3.load Manager config
+        cellWillAppearHandler = _cellWillAppearHandler;
+    }
+    return cellWillAppearHandler;
 }
 
 - (NSString *)loadCellIdentifierWith:(NSIndexPath *)indexPath
@@ -240,13 +297,19 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
     Class cellClass = [self loadClassWith:indexPath];
     NSString *cellellIdentifier = [self loadCellIdentifierWith:indexPath];
     UINib *nib = [self loadNibCacheWith:cellClass];
+    void (^cellDidLoadHandler)(UITableView *tableView, id cell, NSIndexPath *indexPath) =
+        [self loadCellDidLoadHandlerWith:indexPath];
+    void (^cellWillAppearHandler)(UITableView *tableView, id cell, NSIndexPath *indexPath) =
+        [self loadCellWillAppearHandlerWith:indexPath];
     if (nib)
     {
         cell = [cellClass hd_cellForTableView:tableView
                                       fromNib:nib
                                    identifier:cellellIdentifier
                                     indexPath:indexPath
-                                         item:[self itemAtIndexPath:indexPath]];
+                                         item:[self itemAtIndexPath:indexPath]
+                               didLoadHandler:cellDidLoadHandler
+                            willAppearHandler:cellWillAppearHandler];
     }
     else
     {
@@ -257,10 +320,13 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
                                         withStyle:cellStyle
                                        identifier:cellellIdentifier
                                         indexPath:indexPath
-                                             item:[self itemAtIndexPath:indexPath]];
+                                             item:[self itemAtIndexPath:indexPath]
+                                   didLoadHandler:cellDidLoadHandler
+                                willAppearHandler:cellWillAppearHandler];
         }
         else
         {
+            // need call
             cell =
                 [cellClass hd_cellForTableView:tableView withStyle:cellStyle indexPath:indexPath];
         }
@@ -351,7 +417,8 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
         cell = [self loadCellWith:tableView indexPath:indexPath];
     }
     // config  cell
-    HDTableViewManagerCellConfigure cellConfigure = [self loadCellConfigureWith:indexPath];
+    void (^cellConfigure)(id cell, id itemData, NSIndexPath *indexPath) =
+        [self loadCellConfigureWith:indexPath];
     if (cellConfigure)
     {
         cellConfigure(cell, [self loadItemDataWith:indexPath], indexPath);
