@@ -27,11 +27,53 @@ typedef void (^HDTableViewManagerCellConfigure)(id cell, id itemData,
 extern const CGFloat HDTableViewManagerAutomaticDimension;
 
 #pragma mark
+#pragma mark HDTableViewCellConfigureProtocol
+
+@protocol HDTableViewCellConfigureProtocol <NSObject>
+
+@required
+
+/**
+ *  UITableViewCell加载的类型
+ */
+@property (nonatomic, assign, readwrite) Class cellClass;
+
+/**
+ *  创建cell时reusableIdentifier
+ */
+@property (nonatomic, copy, readwrite) NSString *cellIdentifier;
+
+/**
+ *  UITableViewCell的style(当通过代码创建系统Cell时有效)
+ */
+@property (nonatomic, assign, readwrite) UITableViewCellStyle cellStyle;
+
+/**
+ *  UITableViewCell数据配置回调
+ */
+@property (nonatomic, copy, readwrite) void (^cellConfigure)
+    (id cell, id itemData, NSIndexPath *indexPath);
+
+/**
+ *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellDidLoad,可同时存在)
+ */
+@property (nonatomic, copy, readwrite) void (^cellDidLoadHandler)
+    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+
+/**
+ *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellWillAppear,可同时存在)
+ */
+@property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
+    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+
+@end
+
+#pragma mark
 #pragma mark HDTableViewSectionProtocol
 /**
  *  用于配置TableView Section相关属性
  */
-@protocol HDTableViewSectionProtocol <NSObject>
+@protocol HDTableViewSectionProtocol <HDTableViewCellConfigureProtocol>
 
 @required
 
@@ -72,34 +114,6 @@ extern const CGFloat HDTableViewManagerAutomaticDimension;
 #pragma mark Cells
 
 /**
- *  UITableViewCell加载的类型
- */
-@property (nonatomic, assign, readwrite) Class cellClass;
-
-/**
- *  UITableViewCell的style(当通过代码创建系统Cell时有效)
- */
-@property (nonatomic, assign, readwrite) UITableViewCellStyle cellStyle;
-
-/**
- *  UITableViewCell数据配置回调
- */
-@property (nonatomic, copy, readwrite) void (^cellConfigure)
-    (id cell, id itemData, NSIndexPath *indexPath);
-
-/**
- *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellDidLoad,可同时存在)
- */
-@property (nonatomic, copy, readwrite) void (^cellDidLoadHandler)
-    (UITableView *tableView, id cell, NSIndexPath *indexPath);
-
-/**
- *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellWillAppear,可同时存在)
- */
-@property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
-    (UITableView *tableView, id cell, NSIndexPath *indexPath);
-
-/**
  *  section下面的cell数据模型
  */
 @property (nonatomic, strong, readonly) NSMutableArray *items;
@@ -112,42 +126,9 @@ extern const CGFloat HDTableViewManagerAutomaticDimension;
 /**
  *  用于配置TableView Cell相关属性
  */
-@protocol HDTableViewItemProtocol <NSObject>
+@protocol HDTableViewItemProtocol <HDTableViewCellConfigureProtocol>
 
 @required
-
-/**
- *  UITableViewCell加载的类型
- */
-@property (nonatomic, assign, readwrite) Class cellClass;
-
-/**
- *  UITableViewCell的style(当通过代码创建系统Cell时有效)
- */
-@property (nonatomic, assign, readwrite) UITableViewCellStyle cellStyle;
-
-/**
- *  UITableViewCell数据配置回调
- */
-@property (nonatomic, copy, readwrite) void (^cellConfigure)
-    (id cell, id itemData, NSIndexPath *indexPath);
-
-/**
- *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellDidLoad,可同时存在)
- */
-@property (nonatomic, copy, readwrite) void (^cellDidLoadHandler)
-    (UITableView *tableView, id cell, NSIndexPath *indexPath);
-
-/**
- *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellWillAppear,可同时存在)
- */
-@property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
-    (UITableView *tableView, id cell, NSIndexPath *indexPath);
-
-/**
- *  创建cell时reusableIdentifier
- */
-@property (nonatomic, copy, readwrite) NSString *cellIdentifier;
 
 /**
  *  cell数据模型

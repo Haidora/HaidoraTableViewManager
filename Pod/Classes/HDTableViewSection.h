@@ -53,6 +53,11 @@
 @property (nonatomic, assign, readwrite) Class cellClass;
 
 /**
+ *  创建cell时reusableIdentifier
+ */
+@property (nonatomic, copy, readwrite) NSString *cellIdentifier;
+
+/**
  *  UITableViewCell的style(当通过代码创建系统Cell时有效)
  */
 @property (nonatomic, assign, readwrite) UITableViewCellStyle cellStyle;

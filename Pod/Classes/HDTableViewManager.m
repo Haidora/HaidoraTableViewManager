@@ -188,6 +188,10 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
     }
     if (cellStyle == unknow)
     {
+        cellStyle = _cellStyle;
+    }
+    if (cellStyle == unknow)
+    {
         // 3.load Manager config
         cellStyle = UITableViewCellStyleDefault;
     }
@@ -287,6 +291,10 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
     if (!cellellIdentifier)
     {
         cellellIdentifier = [[self loadClassWith:indexPath] hd_cellIdentifier];
+    }
+    if (!cellellIdentifier)
+    {
+        cellellIdentifier = _cellIdentifier;
     }
     return cellellIdentifier;
 }

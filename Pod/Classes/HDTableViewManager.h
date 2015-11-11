@@ -14,7 +14,8 @@
 /**
  *  UITableVieDataSource 和 UITableViewDelegate的封装.
  */
-@interface HDTableViewManager : NSObject <UITableViewDataSource, UITableViewDelegate>
+@interface HDTableViewManager
+    : NSObject <HDTableViewCellConfigureProtocol, UITableViewDataSource, UITableViewDelegate>
 
 /**
  *  对应UITableView中的sections.(元素需要实现<HDTableViewSectionProtocol>),auto create
@@ -32,11 +33,15 @@
 @property (nonatomic, weak, readwrite) id<HDTableViewManagerDelegate> delegate;
 
 #pragma mark Cell
-
 /**
  *  UITableViewCell加载的类型
  */
 @property (nonatomic, assign, readwrite) Class cellClass;
+
+/**
+ *  创建cell时reusableIdentifier
+ */
+@property (nonatomic, copy, readwrite) NSString *cellIdentifier;
 
 /**
  *  UITableViewCell的style(当通过代码创建系统Cell时有效)
@@ -60,6 +65,9 @@
  */
 @property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
     (UITableView *tableView, id cell, NSIndexPath *indexPath);
+
+#pragma mark
+#pragma mark Manager
 
 - (instancetype)initWithSections:(NSMutableArray *)sections
                        cellClass:(Class)cellClass
@@ -92,6 +100,9 @@
  */
 - (id)itemDataAtIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ *  计算Cell高度
+ */
 - (CGFloat)hd_tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
