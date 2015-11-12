@@ -49,6 +49,10 @@
  */
 @property (nonatomic, strong, readwrite) id item;
 
-+ (instancetype)item;
+/**
+ *  内部有初始化
+ *
+ */
++ (instancetype)item __attribute__((objc_requires_super));
 
 @end

@@ -25,6 +25,7 @@ typedef void (^HDTableViewManagerCellConfigure)(id cell, id itemData,
  *)indexPath
  */
 extern const CGFloat HDTableViewManagerAutomaticDimension;
+extern const UITableViewCellStyle UITableViewCellStyleUnknow;
 
 #pragma mark
 #pragma mark HDTableViewCellConfigureProtocol

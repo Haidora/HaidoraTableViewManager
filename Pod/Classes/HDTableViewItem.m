@@ -12,7 +12,9 @@
 
 + (instancetype)item
 {
-    return [[self alloc] init];
+    HDTableViewItem *item = [[self alloc] init];
+    item.cellStyle = UITableViewCellStyleUnknow;
+    return item;
 }
 
 @end

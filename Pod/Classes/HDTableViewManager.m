@@ -9,6 +9,7 @@
 #import "HDTableViewManager.h"
 
 const CGFloat HDTableViewManagerAutomaticDimension = -7;
+const UITableViewCellStyle UITableViewCellStyleUnknow = -7;
 
 @interface HDTableViewManager ()
 
@@ -169,15 +170,14 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
 
 - (UITableViewCellStyle)loadCellStyleWith:(NSIndexPath *)indexPath
 {
-    static NSInteger unknow = -3;
-    UITableViewCellStyle cellStyle = unknow;
+    UITableViewCellStyle cellStyle = UITableViewCellStyleUnknow;
     //     1.load Item config
     NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
     if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
     {
         cellStyle = tableViewItem.cellStyle;
     }
-    if (cellStyle == unknow)
+    if (cellStyle == UITableViewCellStyleUnknow)
     {
         // 2.load Section config
         NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
@@ -186,11 +186,11 @@ const CGFloat HDTableViewManagerAutomaticDimension = -7;
             cellStyle = tableViewSection.cellStyle;
         }
     }
-    if (cellStyle == unknow)
+    if (cellStyle == UITableViewCellStyleUnknow)
     {
         cellStyle = _cellStyle;
     }
-    if (cellStyle == unknow)
+    if (cellStyle == UITableViewCellStyleUnknow)
     {
         // 3.load Manager config
         cellStyle = UITableViewCellStyleDefault;

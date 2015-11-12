@@ -18,7 +18,9 @@
 
 + (instancetype)section
 {
-    return [[self alloc] init];
+    HDTableViewSection *section = [[self alloc] init];
+    section.cellStyle = UITableViewCellStyleUnknow;
+    return section;
 }
 
 #pragma mark

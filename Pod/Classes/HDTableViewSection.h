@@ -85,6 +85,10 @@
  */
 @property (nonatomic, strong, readonly) NSMutableArray *items;
 
-+ (instancetype)section;
+/**
+ *  内部有初始化
+ *
+ */
++ (instancetype)section __attribute__((objc_requires_super));
 
 @end
