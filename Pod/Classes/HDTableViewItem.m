@@ -14,6 +14,7 @@
 {
     HDTableViewItem *item = [[self alloc] init];
     item.cellStyle = UITableViewCellStyleUnknow;
+    item.cellHeight = HDTableViewManagerCellHeightUnknow;
     return item;
 }
 

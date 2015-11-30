@@ -63,6 +63,11 @@
 @property (nonatomic, assign, readwrite) UITableViewCellStyle cellStyle;
 
 /**
+ *  UITableViewCell的高度(默认是HDTableViewManagerCellHeightUnknow)
+ */
+@property (nonatomic, assign, readwrite) CGFloat cellHeight;
+
+/**
  *  UITableViewCell数据配置回调
  */
 @property (nonatomic, copy, readwrite) void (^cellConfigure)

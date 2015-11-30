@@ -20,6 +20,7 @@
 {
     HDTableViewSection *section = [[self alloc] init];
     section.cellStyle = UITableViewCellStyleUnknow;
+    section.cellHeight = HDTableViewManagerCellHeightUnknow;
     return section;
 }
 

@@ -10,6 +10,7 @@
 
 const CGFloat HDTableViewManagerAutomaticDimension = -7;
 const UITableViewCellStyle UITableViewCellStyleUnknow = -7;
+const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
 
 @interface HDTableViewManager ()
 
@@ -36,6 +37,7 @@ const UITableViewCellStyle UITableViewCellStyleUnknow = -7;
         _cellClass = cellClass;
         _cellStyle = cellStyle;
         _cellConfigure = [cellConfigure copy];
+        _cellHeight = HDTableViewManagerCellHeightUnknow;
         _delegate = delegate;
     }
     return self;
@@ -158,12 +160,30 @@ const UITableViewCellStyle UITableViewCellStyleUnknow = -7;
 
 - (CGFloat)loadCellHeightWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 44.0;
-    Class cellClass = [self loadClassWith:indexPath];
-    if ([cellClass isSubclassOfClass:[UITableViewCell class]])
+    CGFloat height = HDTableViewManagerCellHeightUnknow;
+    //     1.load Item config
+    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
     {
-        height = [cellClass hd_cellHeightForTableView:tableView
-                                              content:[self loadItemDataWith:indexPath]];
+        height = tableViewItem.cellHeight;
+    }
+    if (height == HDTableViewManagerCellHeightUnknow)
+    {
+        // 2.load Section config
+        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        {
+            height = tableViewSection.cellHeight;
+        }
+    }
+    if (height == HDTableViewManagerCellHeightUnknow)
+    {
+        Class cellClass = [self loadClassWith:indexPath];
+        if ([cellClass isSubclassOfClass:[UITableViewCell class]])
+        {
+            height = [cellClass hd_cellHeightForTableView:tableView
+                                                  content:[self loadItemDataWith:indexPath]];
+        }
     }
     return height;
 }

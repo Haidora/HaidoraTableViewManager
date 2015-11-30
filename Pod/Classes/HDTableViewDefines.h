@@ -26,6 +26,7 @@ typedef void (^HDTableViewManagerCellConfigure)(id cell, id itemData,
  */
 extern const CGFloat HDTableViewManagerAutomaticDimension;
 extern const UITableViewCellStyle UITableViewCellStyleUnknow;
+extern const CGFloat HDTableViewManagerCellHeightUnknow;
 
 #pragma mark
 #pragma mark HDTableViewCellConfigureProtocol
@@ -48,6 +49,11 @@ extern const UITableViewCellStyle UITableViewCellStyleUnknow;
  *  UITableViewCell的style(当通过代码创建系统Cell时有效)
  */
 @property (nonatomic, assign, readwrite) UITableViewCellStyle cellStyle;
+
+/**
+ *  UITableViewCell的高度(默认是HDTableViewManagerCellHeightUnknow)
+ */
+@property (nonatomic, assign, readwrite) CGFloat cellHeight;
 
 /**
  *  UITableViewCell数据配置回调
