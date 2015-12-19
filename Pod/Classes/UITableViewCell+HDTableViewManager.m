@@ -208,7 +208,8 @@ static char *kHD_item = "kHD_item";
         NSArray *nibObjects = [nib instantiateWithOwner:nil options:nil];
         for (UITableViewCell *nibCell in nibObjects)
         {
-            if ([nibCell.reuseIdentifier isEqualToString:identifier])
+            if ([[nibCell class] isSubclassOfClass:[UITableViewCell class]] &&
+                [nibCell.reuseIdentifier isEqualToString:identifier])
             {
                 cell = nibCell;
                 [cell hd_cellDidLoad];
