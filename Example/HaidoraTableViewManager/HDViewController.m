@@ -9,11 +9,15 @@
 #import "HDViewController.h"
 #import <HaidoraTableViewManager.h>
 #import "HDViewControllerCell.h"
+#import "HDModel.h"
 
-@interface HDViewController () <HDTableViewManagerDelegate>
+@interface HDViewController ()
 
 @property (nonatomic, strong) HDTableViewManager *manager;
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) HDTableViewSection *baseSection;
+@property (nonatomic, strong) HDTableViewSection *systemCellSection;
+@property (nonatomic, strong) HDTableViewSection *customCellSection;
+@property (nonatomic, strong) HDTableViewSection *tapCellSection;
 
 @end
 
@@ -22,119 +26,158 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
-    self.tableView.autoresizingMask =
-        UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.tableView.tableFooterView = [[UIView alloc] init];
-    [self.view addSubview:self.tableView];
-    // Do any additional setup after loading the view, typically from a nib.
-    _manager = [HDTableViewManager manager];
-    _manager.cellDidLoadHandler =
-        ^(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath) {
-          if (indexPath.row % 2)
-          {
-              cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-          }
-          else
-          {
-              cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-          }
-        };
-    _manager.cellWillAppearHandler =
-        ^(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath) {
-          NSLog(@"%@-%@", indexPath, cell);
-        };
-    _manager.delegate = self;
-    //普通cell
-    void (^cellConSection)(id cell, id itemData, NSIndexPath *indexPath) =
-        ^(UITableViewCell *cell, id itemData, NSIndexPath *indexPath) {
-          cell.textLabel.text =
-              [NSString stringWithFormat:@"index-%@-%@", @(indexPath.section), @(indexPath.row)];
-          cell.detailTextLabel.text =
-              [NSString stringWithFormat:@"subIndex-%@-%@", @(indexPath.section), @(indexPath.row)];
-        };
+    //组织结构
+    [self.manager.sections addObject:self.baseSection];
+    [self.manager.sections addObject:self.systemCellSection];
+    [self.manager.sections addObject:self.customCellSection];
+    [self.manager.sections addObject:self.tapCellSection];
 
-    HDTableViewSection *section1 = [HDTableViewSection section];
-    section1.cellDidLoadHandler =
-        ^(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath) {
-          if (indexPath.row % 2)
-          {
-              cell.accessoryType = UITableViewCellAccessoryDetailButton;
-          }
-          else
-          {
-              cell.accessoryType = UITableViewCellAccessoryCheckmark;
-          }
-        };
-    section1.titleForHeader = @"系统自带的cell";
-    HDTableViewItem *item1 = [HDTableViewItem item];
-    item1.cellDidLoadHandler =
-        ^(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath) {
-          cell.accessoryType = UITableViewCellAccessoryNone;
-        };
-    item1.cellConfigure = cellConSection;
-    [section1.items addObject:item1];
-    HDTableViewItem *item2 = [HDTableViewItem item];
-    item2.cellStyle = UITableViewCellStyleValue1;
-    item2.cellConfigure = cellConSection;
-    [section1.items addObject:item2];
-    HDTableViewItem *item3 = [HDTableViewItem item];
-    item3.cellStyle = UITableViewCellStyleValue2;
-    item3.cellConfigure = cellConSection;
-    [section1.items addObject:item3];
-    HDTableViewItem *item4 = [HDTableViewItem item];
-    item4.cellStyle = UITableViewCellStyleSubtitle;
-    item4.cellConfigure = cellConSection;
-    [section1.items addObject:item4];
-    [_manager.sections addObject:section1];
-    //自定义cell
-    HDTableViewSection *section2 = [HDTableViewSection section];
-    section2.titleForHeader = @"自定义cell";
-    HDTableViewItem *item21 = [HDTableViewItem item];
-    item21.cellClass = [HDViewControllerCell1 class];
-    [section2.items addObject:item21];
-    HDTableViewItem *item22 = [HDTableViewItem item];
-    item22.cellClass = [HDViewControllerCell class];
-    [section2.items addObject:item22];
-    HDTableViewItem *item23 = [HDTableViewItem item];
-    item23.cellClass = [HDViewControllerCell class];
-    item23.cellIdentifier = @"HDViewControllerCell1";
-    [section2.items addObject:item23];
-
-    [_manager.sections addObject:section2];
     // datasource
     self.tableView.dataSource = _manager;
     self.tableView.delegate = _manager;
 }
 
-- (void)didReceiveMemoryWarning
+- (HDTableViewManager *)manager
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
-           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewCellEditingStyleDelete;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView
-    estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 0)
+    if (nil == _manager)
     {
-        return HDTableViewManagerAutomaticDimension;
+        _manager = [HDTableViewManager manager];
     }
-    else
+    return _manager;
+}
+
+- (HDTableViewSection *)baseSection
+{
+    if (nil == _baseSection)
     {
-        return 100;
+        _baseSection = [HDTableViewSection section];
+        _baseSection.titleForHeader = @"基础使用";
+        //配置cell的显示
+        _baseSection.cellConfigure =
+            ^(UITableViewCell *cell, NSString *itemData, NSIndexPath *indexPath) {
+              cell.textLabel.text = itemData;
+            };
+        //配置cell显示的数据
+        for (NSInteger index = 0; index < 3; index++)
+        {
+            [_baseSection.items addObject:[NSString stringWithFormat:@"cell-%@", @(index)]];
+        }
     }
+    return _baseSection;
+}
+
+- (HDTableViewSection *)systemCellSection
+{
+    if (nil == _systemCellSection)
+    {
+        _systemCellSection = [HDTableViewSection section];
+        _systemCellSection.titleForHeader = @"自带cell";
+        HDTableViewItem *item;
+
+        item = [HDTableViewItem item];
+        item.cellStyle = UITableViewCellStyleDefault;
+        item.cellConfigure = ^(UITableViewCell *cell, id itemData, NSIndexPath *indexPath) {
+          cell.textLabel.text = @"UITableViewCellStyleDefault";
+          cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        };
+        [_systemCellSection.items addObject:item];
+
+        item = [HDTableViewItem item];
+        item.cellStyle = UITableViewCellStyleSubtitle;
+        item.cellConfigure = ^(UITableViewCell *cell, id itemData, NSIndexPath *indexPath) {
+          cell.textLabel.text = @"UITableViewCellStyleSubtitle";
+          cell.detailTextLabel.text = @"UITableViewCellStyleSubtitle-detailTextLabel";
+        };
+        [_systemCellSection.items addObject:item];
+
+        item = [HDTableViewItem item];
+        item.cellStyle = UITableViewCellStyleValue1;
+        item.cellConfigure = ^(UITableViewCell *cell, id itemData, NSIndexPath *indexPath) {
+          cell.textLabel.text = @"UITableViewCellStyleValue1";
+          cell.detailTextLabel.text = @"detail";
+        };
+        [_systemCellSection.items addObject:item];
+
+        item = [HDTableViewItem item];
+        item.cellStyle = UITableViewCellStyleValue2;
+        item.cellConfigure = ^(UITableViewCell *cell, id itemData, NSIndexPath *indexPath) {
+          cell.textLabel.text = @"style";
+          cell.detailTextLabel.text = @"UITableViewCellStyleValue2";
+        };
+        [_systemCellSection.items addObject:item];
+    }
+    return _systemCellSection;
+}
+
+- (HDTableViewSection *)customCellSection
+{
+    if (nil == _customCellSection)
+    {
+        _customCellSection = [HDTableViewSection section];
+        _customCellSection.titleForHeader = @"自定义cell";
+        HDTableViewItem *item;
+
+        item = [HDTableViewItem item];
+        item.cellClass = [HDViewControllerCell class];
+        [_customCellSection.items addObject:item];
+
+        item = [HDTableViewItem item];
+        item.cellClass = [HDViewControllerCell1 class];
+        [_customCellSection.items addObject:item];
+
+        item = [HDTableViewItem item];
+        item.cellClass = [HDViewControllerCell1 class];
+        item.cellDidLoadHandler =
+            ^(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath) {
+              cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            };
+        item.cellHeight = 80;
+        HDModel *model;
+        model = [[HDModel alloc] init];
+        model.userInfo = @"custom Height 80.";
+        item.item = model;
+        [_customCellSection.items addObject:item];
+    }
+    return _customCellSection;
+}
+
+- (HDTableViewSection *)tapCellSection
+{
+    if (nil == _tapCellSection)
+    {
+        _tapCellSection = [HDTableViewSection section];
+        _tapCellSection.titleForHeader = @"点击事件";
+        _tapCellSection.tableViewDidSelectRowAtIndexPath =
+            ^(UITableView *tableView, NSIndexPath *indexPath) {
+              [[[UIAlertView alloc] initWithTitle:@"Title"
+                                          message:@"Tap Section"
+                                         delegate:nil
+                                cancelButtonTitle:@"ok"
+                                otherButtonTitles:nil] show];
+            };
+        _tapCellSection.cellConfigure =
+            ^(UITableViewCell *cell, id itemData, NSIndexPath *indexPath) {
+              cell.textLabel.text = itemData;
+            };
+        [_tapCellSection.items addObject:@"Cell"];
+
+        HDTableViewItem *item;
+
+        item = [HDTableViewItem item];
+        item.cellConfigure = ^(UITableViewCell *cell, id itemData, NSIndexPath *indexPath) {
+          cell.textLabel.text = @"Tap Cell";
+        };
+        item.tableViewDidSelectRowAtIndexPath = ^(UITableView *tableView, NSIndexPath *indexPath) {
+          [[[UIAlertView alloc] initWithTitle:@"Title"
+                                      message:@"Tap Cell"
+                                     delegate:nil
+                            cancelButtonTitle:@"ok"
+                            otherButtonTitles:nil] show];
+        };
+
+        [_tapCellSection.items addObject:item];
+    }
+    return _tapCellSection;
 }
 
 @end

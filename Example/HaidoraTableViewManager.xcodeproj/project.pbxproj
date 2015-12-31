@@ -22,8 +22,10 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		AB075D8B1C34C34100625CDB /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB075D8A1C34C34100625CDB /* Launch Screen.storyboard */; };
 		AB58CC0F1B58032700F6CEBE /* HDViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB58CC0E1B58032700F6CEBE /* HDViewControllerCell.m */; };
 		AB58CC111B58032F00F6CEBE /* HDViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB58CC101B58032F00F6CEBE /* HDViewControllerCell.xib */; };
+		AB89F64E1C35128900B80973 /* HDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB89F64D1C35128900B80973 /* HDModel.m */; };
 		F865F96F1519D6187900A9A8 /* libPods-HaidoraTableViewManager_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4D515E706D45D271342AED /* libPods-HaidoraTableViewManager_Tests.a */; };
 /* End PBXBuildFile section */
 
@@ -65,9 +67,12 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8D4D515E706D45D271342AED /* libPods-HaidoraTableViewManager_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HaidoraTableViewManager_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2576A31CA9C394CD3CFEF7F /* Pods-HaidoraTableViewManager_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaidoraTableViewManager_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HaidoraTableViewManager_Tests/Pods-HaidoraTableViewManager_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		AB075D8A1C34C34100625CDB /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		AB58CC0D1B58032700F6CEBE /* HDViewControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDViewControllerCell.h; sourceTree = "<group>"; };
 		AB58CC0E1B58032700F6CEBE /* HDViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDViewControllerCell.m; sourceTree = "<group>"; };
 		AB58CC101B58032F00F6CEBE /* HDViewControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HDViewControllerCell.xib; sourceTree = "<group>"; };
+		AB89F64C1C35128900B80973 /* HDModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDModel.h; sourceTree = "<group>"; };
+		AB89F64D1C35128900B80973 /* HDModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDModel.m; sourceTree = "<group>"; };
 		C06DF38BF2E552ED3A88705D /* Pods-HaidoraTableViewManager_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaidoraTableViewManager_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HaidoraTableViewManager_Example/Pods-HaidoraTableViewManager_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F312FCB8806669267C2130F2 /* Pods-HaidoraTableViewManager_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaidoraTableViewManager_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HaidoraTableViewManager_Tests/Pods-HaidoraTableViewManager_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +148,8 @@
 				AB58CC0D1B58032700F6CEBE /* HDViewControllerCell.h */,
 				AB58CC0E1B58032700F6CEBE /* HDViewControllerCell.m */,
 				AB58CC101B58032F00F6CEBE /* HDViewControllerCell.xib */,
+				AB89F64C1C35128900B80973 /* HDModel.h */,
+				AB89F64D1C35128900B80973 /* HDModel.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -157,6 +164,7 @@
 				6003F596195388D20070C39A /* InfoPlist.strings */,
 				6003F599195388D20070C39A /* main.m */,
 				6003F59B195388D20070C39A /* HaidoraTableViewManager-Prefix.pch */,
+				AB075D8A1C34C34100625CDB /* Launch Screen.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -287,6 +295,7 @@
 				AB58CC111B58032F00F6CEBE /* HDViewControllerCell.xib in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				AB075D8B1C34C34100625CDB /* Launch Screen.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +412,7 @@
 				6003F59E195388D20070C39A /* HDAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* HDViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				AB89F64E1C35128900B80973 /* HDModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,7 +531,6 @@
 			baseConfigurationReference = C06DF38BF2E552ED3A88705D /* Pods-HaidoraTableViewManager_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HaidoraTableViewManager/HaidoraTableViewManager-Prefix.pch";
 				INFOPLIST_FILE = "HaidoraTableViewManager/HaidoraTableViewManager-Info.plist";
@@ -536,7 +545,6 @@
 			baseConfigurationReference = 2C9F8F9264A4DCB3B46EE3E6 /* Pods-HaidoraTableViewManager_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HaidoraTableViewManager/HaidoraTableViewManager-Prefix.pch";
 				INFOPLIST_FILE = "HaidoraTableViewManager/HaidoraTableViewManager-Info.plist";

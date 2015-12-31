@@ -15,7 +15,8 @@
  *  UITableVieDataSource 和 UITableViewDelegate的封装.
  */
 @interface HDTableViewManager
-    : NSObject <HDTableViewCellConfigureProtocol, UITableViewDataSource, UITableViewDelegate>
+    : NSObject <HDTableViewConfigureProtocol, HDTableViewCellConfigureProtocol,
+                UITableViewDataSource, UITableViewDelegate>
 
 /**
  *  对应UITableView中的sections.(元素需要实现<HDTableViewSectionProtocol>),auto create
@@ -32,7 +33,17 @@
  */
 @property (nonatomic, weak, readwrite) id<HDTableViewManagerDelegate> delegate;
 
-#pragma mark Cell
+#pragma mark
+#pragma mark HDTableViewConfigureProtocol
+/**
+ *  @see - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+ */
+@property (nonatomic, copy, readwrite) void (^tableViewDidSelectRowAtIndexPath)
+    (UITableView *tableView, NSIndexPath *indexPath);
+
+#pragma mark
+#pragma mark HDTableViewCellConfigureProtocol
+
 /**
  *  UITableViewCell加载的类型
  */
@@ -44,7 +55,8 @@
 @property (nonatomic, copy, readwrite) NSString *cellIdentifier;
 
 /**
- *  UITableViewCell的style(当通过代码创建系统Cell时有效)
+ *  UITableViewCell的style(当通过代码创建系统Cell时有效默认是UITableViewCellStyleUnknow)
+ *  @see UITableViewCellStyle
  */
 @property (nonatomic, assign, readwrite) UITableViewCellStyle cellStyle;
 
@@ -54,22 +66,26 @@
 @property (nonatomic, assign, readwrite) CGFloat cellHeight;
 
 /**
- *  UITableViewCell数据配置回调
+ *  UITableViewCell 数据配置回调
+ *
+ *  @param cell
+ *  @param itemData     cell对应的数据
+ *  @param indexPath    cell对应的indexPath
  */
 @property (nonatomic, copy, readwrite) void (^cellConfigure)
-    (id cell, id itemData, NSIndexPath *indexPath);
+    (UITableViewCell *cell, id itemData, NSIndexPath *indexPath);
 
 /**
  *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellDidLoad,可同时存在)
  */
 @property (nonatomic, copy, readwrite) void (^cellDidLoadHandler)
-    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+    (UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
 
 /**
  *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellWillAppear,可同时存在)
  */
 @property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
-    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+    (UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
 
 #pragma mark
 #pragma mark Manager

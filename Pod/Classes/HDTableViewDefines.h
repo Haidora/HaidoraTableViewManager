@@ -9,24 +9,35 @@
 #ifndef Pods_HDTableViewDefines_h
 #define Pods_HDTableViewDefines_h
 
-#pragma mark
-#pragma mark Config
-
-typedef void (^HDTableViewManagerCellConfigure)(id cell, id itemData,
-                                                NSIndexPath *indexPath) DEPRECATED_ATTRIBUTE;
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 /**
+ * @brief
+ *如果HDTableViewManagerDelegate中cell高度返回为HDTableViewManagerAutomaticDimension,则根据配置加载UITableViewCell(item>section>manager>cell)中的高度.
  *
- 如果HDTableViewManagerDelegate中cell高度返回为HDTableViewManagerAutomaticDimension,则加载UITableViewCell中的高度配置(hd_cellHeightForTableView:content:)
- *
- *- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
- *
- *- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath
- *)indexPath
+ * @see - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath
+ **)indexPath
+ * @see - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath
+ **)indexPath
  */
 extern const CGFloat HDTableViewManagerAutomaticDimension;
 extern const UITableViewCellStyle UITableViewCellStyleUnknow;
 extern const CGFloat HDTableViewManagerCellHeightUnknow;
+
+#pragma mark
+#pragma mark HDTableViewConfigureProtocol
+
+@protocol HDTableViewConfigureProtocol <NSObject>
+
+@optional
+/**
+ *  @see - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+ */
+@property (nonatomic, copy, readwrite) void (^tableViewDidSelectRowAtIndexPath)
+    (UITableView *tableView, NSIndexPath *indexPath);
+
+@end
 
 #pragma mark
 #pragma mark HDTableViewCellConfigureProtocol
@@ -47,6 +58,7 @@ extern const CGFloat HDTableViewManagerCellHeightUnknow;
 
 /**
  *  UITableViewCell的style(当通过代码创建系统Cell时有效)
+ *  @see UITableViewCellStyle
  */
 @property (nonatomic, assign, readwrite) UITableViewCellStyle cellStyle;
 
@@ -56,22 +68,26 @@ extern const CGFloat HDTableViewManagerCellHeightUnknow;
 @property (nonatomic, assign, readwrite) CGFloat cellHeight;
 
 /**
- *  UITableViewCell数据配置回调
+ *  UITableViewCell 数据配置回调
+ *
+ *  @param cell
+ *  @param itemData     cell对应的数据
+ *  @param indexPath    cell对应的indexPath
  */
 @property (nonatomic, copy, readwrite) void (^cellConfigure)
-    (id cell, id itemData, NSIndexPath *indexPath);
+    (UITableViewCell *cell, id itemData, NSIndexPath *indexPath);
 
 /**
  *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellDidLoad,可同时存在)
  */
 @property (nonatomic, copy, readwrite) void (^cellDidLoadHandler)
-    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+    (UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
 
 /**
  *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellWillAppear,可同时存在)
  */
 @property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
-    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+    (UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
 
 @end
 
@@ -80,7 +96,8 @@ extern const CGFloat HDTableViewManagerCellHeightUnknow;
 /**
  *  用于配置TableView Section相关属性
  */
-@protocol HDTableViewSectionProtocol <HDTableViewCellConfigureProtocol>
+@protocol
+    HDTableViewSectionProtocol <HDTableViewConfigureProtocol, HDTableViewCellConfigureProtocol>
 
 @required
 
@@ -133,12 +150,12 @@ extern const CGFloat HDTableViewManagerCellHeightUnknow;
 /**
  *  用于配置TableView Cell相关属性
  */
-@protocol HDTableViewItemProtocol <HDTableViewCellConfigureProtocol>
+@protocol HDTableViewItemProtocol <HDTableViewConfigureProtocol, HDTableViewCellConfigureProtocol>
 
 @required
 
 /**
- *  cell数据模型
+ *  cell对应的数据
  */
 @property (nonatomic, strong, readwrite) id item;
 
@@ -156,3 +173,9 @@ extern const CGFloat HDTableViewManagerCellHeightUnknow;
 @end
 
 #endif
+
+#pragma mark
+#pragma mark DEPRECATED
+
+typedef void (^HDTableViewManagerCellConfigure)(id cell, id itemData,
+                                                NSIndexPath *indexPath) DEPRECATED_ATTRIBUTE;

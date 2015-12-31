@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface HDViewController : UIViewController
+@interface HDViewController : UITableViewController
 
 @end

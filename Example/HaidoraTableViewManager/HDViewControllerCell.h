@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HDViewControllerCell : UITableViewCell
+@protocol HDCellModelProtcol <NSObject>
+
+@property (nonatomic, strong, readonly) NSString *title;
 
 @end
 
+@interface HDViewControllerCell : UITableViewCell
+
+@end
 
 @interface HDViewControllerCell1 : UITableViewCell
 

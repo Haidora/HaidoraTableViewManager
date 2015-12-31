@@ -11,13 +11,30 @@
 
 @interface HDTableViewItem : NSObject <HDTableViewItemProtocol>
 
+#pragma mark
+#pragma mark HDTableViewConfigureProtocol
+/**
+ *  @see - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+ */
+@property (nonatomic, copy, readwrite) void (^tableViewDidSelectRowAtIndexPath)
+    (UITableView *tableView, NSIndexPath *indexPath);
+
+#pragma mark
+#pragma mark HDTableViewCellConfigureProtocol
+
 /**
  *  UITableViewCell加载的类型
  */
 @property (nonatomic, assign, readwrite) Class cellClass;
 
 /**
- *  UITableViewCell的style(当通过代码创建系统Cell时有效)
+ *  创建cell时reusableIdentifier
+ */
+@property (nonatomic, copy, readwrite) NSString *cellIdentifier;
+
+/**
+ *  UITableViewCell的style(当通过代码创建系统Cell时有效默认是UITableViewCellStyleUnknow)
+ *  @see UITableViewCellStyle
  */
 @property (nonatomic, assign, readwrite) UITableViewCellStyle cellStyle;
 
@@ -27,30 +44,31 @@
 @property (nonatomic, assign, readwrite) CGFloat cellHeight;
 
 /**
- *  UITableViewCell数据配置回调
+ *  UITableViewCell 数据配置回调
+ *
+ *  @param cell
+ *  @param itemData     cell对应的数据
+ *  @param indexPath    cell对应的indexPath
  */
 @property (nonatomic, copy, readwrite) void (^cellConfigure)
-    (id cell, id itemData, NSIndexPath *indexPath);
+    (UITableViewCell *cell, id itemData, NSIndexPath *indexPath);
 
 /**
  *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellDidLoad,可同时存在)
  */
 @property (nonatomic, copy, readwrite) void (^cellDidLoadHandler)
-    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+    (UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
 
 /**
  *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellWillAppear,可同时存在)
  */
 @property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
-    (UITableView *tableView, id cell, NSIndexPath *indexPath);
+    (UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
 
+#pragma mark
+#pragma mark HDTableViewItemProtocol
 /**
- *  创建cell时reusableIdentifier
- */
-@property (nonatomic, copy, readwrite) NSString *cellIdentifier;
-
-/**
- *  cell数据模型
+ *  cell对应的数据
  */
 @property (nonatomic, strong, readwrite) id item;
 

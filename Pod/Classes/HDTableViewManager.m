@@ -7,15 +7,13 @@
 //
 
 #import "HDTableViewManager.h"
+#import "HDTableViewManager+HDPrivateUtils.h"
 
 const CGFloat HDTableViewManagerAutomaticDimension = -7;
 const UITableViewCellStyle UITableViewCellStyleUnknow = -7;
 const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
 
 @interface HDTableViewManager ()
-
-@property (nonatomic, strong) NSMutableDictionary *nibCache;
-
 @end
 
 @implementation HDTableViewManager
@@ -88,278 +86,6 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
     // for uilabel you need set preferredMaxLayoutWidth
     height = size.height + 1;
     return height;
-}
-
-#pragma mark
-#pragma mark Private Utils
-
-- (id)loadItemDataWith:(NSIndexPath *)indexPath
-{
-    id item = nil;
-    NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
-    NSMutableArray *rows = [tableViewSection items];
-    // 1.load Item config
-    NSObject<HDTableViewItemProtocol> *tableViewItem = rows[indexPath.row];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
-    {
-        item = tableViewItem.item;
-    }
-    else
-    {
-        item = tableViewItem;
-    }
-    return item;
-}
-
-- (UINib *)loadNibCacheWith:(Class)cellClass
-{
-    NSAssert([cellClass isSubclassOfClass:[UITableViewCell class]],
-             @"cellClass need subClass of UITablViewCell");
-    UINib *nib = self.nibCache[NSStringFromClass(cellClass)];
-    if (!nib)
-    {
-        nib = [cellClass hd_nib];
-        if (nib)
-        {
-            self.nibCache[NSStringFromClass(cellClass)] = nib;
-        }
-    }
-    return nib;
-}
-
-- (Class)loadClassWith:(NSIndexPath *)indexPath
-{
-    Class cellClass = nil;
-    // 1.load Item config
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
-    {
-        cellClass = tableViewItem.cellClass;
-    }
-    if (!cellClass)
-    {
-        // 2.load Section config
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
-        {
-            cellClass = tableViewSection.cellClass;
-        }
-    }
-    if (!cellClass)
-    {
-        // 3.load Manager config
-        cellClass = _cellClass;
-    }
-    if (!cellClass)
-    {
-        // 4.load Default
-        cellClass = [UITableViewCell class];
-    }
-    return cellClass;
-}
-
-- (CGFloat)loadCellHeightWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
-{
-    CGFloat height = HDTableViewManagerCellHeightUnknow;
-    //     1.load Item config
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
-    {
-        height = tableViewItem.cellHeight;
-    }
-    if (height == HDTableViewManagerCellHeightUnknow)
-    {
-        // 2.load Section config
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
-        {
-            height = tableViewSection.cellHeight;
-        }
-    }
-    if (height == HDTableViewManagerCellHeightUnknow)
-    {
-        Class cellClass = [self loadClassWith:indexPath];
-        if ([cellClass isSubclassOfClass:[UITableViewCell class]])
-        {
-            height = [cellClass hd_cellHeightForTableView:tableView
-                                                  content:[self loadItemDataWith:indexPath]];
-        }
-    }
-    return height;
-}
-
-- (UITableViewCellStyle)loadCellStyleWith:(NSIndexPath *)indexPath
-{
-    UITableViewCellStyle cellStyle = UITableViewCellStyleUnknow;
-    //     1.load Item config
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
-    {
-        cellStyle = tableViewItem.cellStyle;
-    }
-    if (cellStyle == UITableViewCellStyleUnknow)
-    {
-        // 2.load Section config
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
-        {
-            cellStyle = tableViewSection.cellStyle;
-        }
-    }
-    if (cellStyle == UITableViewCellStyleUnknow)
-    {
-        cellStyle = _cellStyle;
-    }
-    if (cellStyle == UITableViewCellStyleUnknow)
-    {
-        // 3.load Manager config
-        cellStyle = UITableViewCellStyleDefault;
-    }
-    return cellStyle;
-}
-
-- (void (^)(id cell, id itemData,
-            NSIndexPath *indexPath))loadCellConfigureWith:(NSIndexPath *)indexPath
-{
-    void (^cellConfigure)(id cell, id itemData, NSIndexPath *indexPath) = nil;
-    //     1.load Item config
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
-    {
-        cellConfigure = tableViewItem.cellConfigure;
-    }
-    if (!cellConfigure)
-    {
-        // 2.load Section config
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
-        {
-            cellConfigure = tableViewSection.cellConfigure;
-        }
-    }
-    if (!cellConfigure)
-    {
-        // 3.load Manager config
-        cellConfigure = _cellConfigure;
-    }
-    return cellConfigure;
-}
-
-- (void (^)(UITableView *tableView, id cell,
-            NSIndexPath *indexPath))loadCellDidLoadHandlerWith:(NSIndexPath *)indexPath
-{
-    void (^cellDidLoadHandler)(UITableView *tableView, id cell, NSIndexPath *indexPath) = nil;
-    //     1.load Item config
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
-    {
-        cellDidLoadHandler = tableViewItem.cellDidLoadHandler;
-    }
-    if (!cellDidLoadHandler)
-    {
-        // 2.load Section config
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
-        {
-            cellDidLoadHandler = tableViewSection.cellDidLoadHandler;
-        }
-    }
-    if (!cellDidLoadHandler)
-    {
-        // 3.load Manager config
-        cellDidLoadHandler = _cellDidLoadHandler;
-    }
-    return cellDidLoadHandler;
-}
-
-- (void (^)(UITableView *tableView, id cell,
-            NSIndexPath *indexPath))loadCellWillAppearHandlerWith:(NSIndexPath *)indexPath
-{
-    void (^cellWillAppearHandler)(UITableView *tableView, id cell, NSIndexPath *indexPath) = nil;
-    //     1.load Item config
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
-    {
-        cellWillAppearHandler = tableViewItem.cellWillAppearHandler;
-    }
-    if (!cellWillAppearHandler)
-    {
-        // 2.load Section config
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
-        {
-            cellWillAppearHandler = tableViewSection.cellWillAppearHandler;
-        }
-    }
-    if (!cellWillAppearHandler)
-    {
-        // 3.load Manager config
-        cellWillAppearHandler = _cellWillAppearHandler;
-    }
-    return cellWillAppearHandler;
-}
-
-- (NSString *)loadCellIdentifierWith:(NSIndexPath *)indexPath
-{
-    NSString *cellellIdentifier;
-    //     1.load Item config
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
-    {
-        cellellIdentifier = tableViewItem.cellIdentifier;
-    }
-    if (!cellellIdentifier)
-    {
-        cellellIdentifier = [[self loadClassWith:indexPath] hd_cellIdentifier];
-    }
-    if (!cellellIdentifier)
-    {
-        cellellIdentifier = _cellIdentifier;
-    }
-    return cellellIdentifier;
-}
-
-- (UITableViewCell *)loadCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell;
-    Class cellClass = [self loadClassWith:indexPath];
-    NSString *cellellIdentifier = [self loadCellIdentifierWith:indexPath];
-    UINib *nib = [self loadNibCacheWith:cellClass];
-    void (^cellDidLoadHandler)(UITableView *tableView, id cell, NSIndexPath *indexPath) =
-        [self loadCellDidLoadHandlerWith:indexPath];
-    void (^cellWillAppearHandler)(UITableView *tableView, id cell, NSIndexPath *indexPath) =
-        [self loadCellWillAppearHandlerWith:indexPath];
-    if (nib)
-    {
-        cell = [cellClass hd_cellForTableView:tableView
-                                      fromNib:nib
-                                   identifier:cellellIdentifier
-                                    indexPath:indexPath
-                                         item:[self itemAtIndexPath:indexPath]
-                               didLoadHandler:cellDidLoadHandler
-                            willAppearHandler:cellWillAppearHandler];
-    }
-    else
-    {
-        UITableViewCellStyle cellStyle = [self loadCellStyleWith:indexPath];
-        if (cellellIdentifier.length > 0)
-        {
-            cell = [cellClass hd_cellForTableView:tableView
-                                        withStyle:cellStyle
-                                       identifier:cellellIdentifier
-                                        indexPath:indexPath
-                                             item:[self itemAtIndexPath:indexPath]
-                                   didLoadHandler:cellDidLoadHandler
-                                willAppearHandler:cellWillAppearHandler];
-        }
-        else
-        {
-            // need call
-            cell =
-                [cellClass hd_cellForTableView:tableView withStyle:cellStyle indexPath:indexPath];
-        }
-    }
-    return cell;
 }
 
 #pragma mark
@@ -529,7 +255,7 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
     }
     if (height == HDTableViewManagerAutomaticDimension)
     {
-        height = [self tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
+        height = [self loadCellHeightWith:tableView indexPath:indexPath];
     }
     return height;
 }
@@ -559,6 +285,7 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
     {
         height = [self.delegate tableView:tableView heightForHeaderInSection:section];
     }
+    else
     {
         NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[section];
         if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
@@ -579,6 +306,7 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
     {
         height = [self.delegate tableView:tableView heightForHeaderInSection:section];
     }
+    else
     {
         NSObject<HDTableViewSectionProtocol> *tableViewSection = _sections[section];
         if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
@@ -695,21 +423,22 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
     }
     else
     {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        void (^tableViewDidSelectRowAtIndexPathWith)(UITableView *tableView,
+                                                     NSIndexPath *indexPath) =
+            [self loadTableViewDidSelectRowAtIndexPathWith:indexPath];
+        if (tableViewDidSelectRowAtIndexPathWith)
+        {
+            tableViewDidSelectRowAtIndexPathWith(tableView, indexPath);
+        }
+        else
+        {
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
     }
 }
 
 #pragma mark
 #pragma mark Getter
-
-- (NSMutableDictionary *)nibCache
-{
-    if (nil == _nibCache)
-    {
-        _nibCache = [[NSMutableDictionary alloc] init];
-    }
-    return _nibCache;
-}
 
 - (NSMutableArray *)sections
 {
