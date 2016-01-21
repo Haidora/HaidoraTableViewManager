@@ -10,11 +10,20 @@
 
 @implementation HDTableViewItem
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        self.cellStyle = UITableViewCellStyleUnknow;
+        self.cellHeight = HDTableViewManagerCellHeightUnknow;
+    }
+    return self;
+}
+
 + (instancetype)item
 {
     HDTableViewItem *item = [[self alloc] init];
-    item.cellStyle = UITableViewCellStyleUnknow;
-    item.cellHeight = HDTableViewManagerCellHeightUnknow;
     return item;
 }
 

@@ -16,11 +16,20 @@
 
 @implementation HDTableViewSection
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        self.cellStyle = UITableViewCellStyleUnknow;
+        self.cellHeight = HDTableViewManagerCellHeightUnknow;
+    }
+    return self;
+}
+
 + (instancetype)section
 {
     HDTableViewSection *section = [[self alloc] init];
-    section.cellStyle = UITableViewCellStyleUnknow;
-    section.cellHeight = HDTableViewManagerCellHeightUnknow;
     return section;
 }
 
