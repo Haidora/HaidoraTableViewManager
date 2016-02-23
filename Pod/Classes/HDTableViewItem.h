@@ -6,8 +6,8 @@
 //
 //
 
-#import <Foundation/Foundation.h>
 #import "HDTableViewDefines.h"
+#import <Foundation/Foundation.h>
 
 @interface HDTableViewItem : NSObject <HDTableViewItemProtocol>
 

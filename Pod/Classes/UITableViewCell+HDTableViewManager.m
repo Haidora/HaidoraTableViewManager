@@ -208,16 +208,22 @@ static char *kHD_item = "kHD_item";
         NSArray *nibObjects = [nib instantiateWithOwner:nil options:nil];
         for (UITableViewCell *nibCell in nibObjects)
         {
-            if ([[nibCell class] isSubclassOfClass:[UITableViewCell class]] &&
-                [nibCell.reuseIdentifier isEqualToString:identifier])
+            if ([[nibCell class] isSubclassOfClass:[UITableViewCell class]])
             {
-                cell = nibCell;
-                [cell hd_cellDidLoad];
-                if (didLoadHandler)
+                if ([nibCell.reuseIdentifier isEqualToString:identifier])
                 {
-                    didLoadHandler(tableView, cell, indexPath);
+                    cell = nibCell;
+                    [cell hd_cellDidLoad];
+                    if (didLoadHandler)
+                    {
+                        didLoadHandler(tableView, cell, indexPath);
+                    }
+                    break;
                 }
-                break;
+                else
+                {
+                    NSAssert(false, @"not set reuseIdentifier for %@", [nibCell class]);
+                }
             }
         }
     }
