@@ -1,80 +1,37 @@
 //
 //  HDTableViewItem.h
-//  Pods
 //
-//  Created by Dailingchi on 15/7/15.
+// Copyright (c) 2016年 mrdaios
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
-#import "HDTableViewDefines.h"
 #import <Foundation/Foundation.h>
-
-@interface HDTableViewItem : NSObject <HDTableViewItemProtocol>
-
-#pragma mark
-#pragma mark HDTableViewConfigureProtocol
-/**
- *  @see - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
- */
-@property (nonatomic, copy, readwrite) void (^tableViewDidSelectRowAtIndexPath)
-    (UITableView *tableView, NSIndexPath *indexPath);
-
-#pragma mark
-#pragma mark HDTableViewCellConfigureProtocol
+#import "HDTableViewDefines.h"
 
 /**
- *  UITableViewCell加载的类型
+ *  Cell的配置
  */
-@property (nonatomic, assign, readwrite) Class cellClass;
-
-/**
- *  创建cell时reusableIdentifier
- */
-@property (nonatomic, copy, readwrite) NSString *cellIdentifier;
-
-/**
- *  UITableViewCell的style(当通过代码创建系统Cell时有效默认是UITableViewCellStyleUnknow)
- *  @see UITableViewCellStyle
- */
-@property (nonatomic, assign, readwrite) UITableViewCellStyle cellStyle;
-
-/**
- *  UITableViewCell的高度(默认是HDTableViewManagerCellHeightUnknow)
- */
-@property (nonatomic, assign, readwrite) CGFloat cellHeight;
-
-/**
- *  UITableViewCell 数据配置回调
- *
- *  @param cell
- *  @param itemData     cell对应的数据
- *  @param indexPath    cell对应的indexPath
- */
-@property (nonatomic, copy, readwrite) void (^cellConfigure)
-    (UITableViewCell *cell, id itemData, NSIndexPath *indexPath);
-
-/**
- *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellDidLoad,可同时存在)
- */
-@property (nonatomic, copy, readwrite) void (^cellDidLoadHandler)
-    (UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
-
-/**
- *  UITableViewCell创建后回调,用于给cell配置其他参数(类似UITableViewCell的hd_cellWillAppear,可同时存在)
- */
-@property (nonatomic, copy, readwrite) void (^cellWillAppearHandler)
-    (UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
-
-#pragma mark
-#pragma mark HDTableViewItemProtocol
-/**
- *  cell对应的数据
- */
-@property (nonatomic, strong, readwrite) id item;
+@interface HDTableViewItem : NSObject <HDTableViewConfigureProtocol,
+                                       HDTableViewCellConfigureProtocol, HDTableViewItemProtocol>
 
 /**
  *  内部有初始化
- *
  */
 + (instancetype)item __attribute__((objc_requires_super));
 

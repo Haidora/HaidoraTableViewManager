@@ -26,6 +26,11 @@
     _manager.cellClass = [HDDemoTableViewCell class];
     HDTableViewSection *section = [HDTableViewSection section];
 
+    //    section.tableViewDidSelectRowAtIndexPath = ^(UITableView *tableView, NSIndexPath
+    //    *indexPath) {
+    //
+    //    };
+
     void (^tapBlock)(NSString *title) = ^(NSString *title) {
       NSLog(@"tap Action-%@", title);
     };
@@ -44,6 +49,8 @@
     viewModel.title = @"789";
     viewModel.tapAction = tapBlock;
     [section.items addObject:viewModel];
+    HDTableViewItem *item = [[HDTableViewItem alloc] init];
+    [section.items addObject:item];
 
     [_manager.sections addObject:section];
 

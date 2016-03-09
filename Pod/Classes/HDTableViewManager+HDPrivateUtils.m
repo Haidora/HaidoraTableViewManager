@@ -1,10 +1,25 @@
 //
 //  HDTableViewManager+HDPrivateUtils.m
-//  Pods
 //
-//  Created by Dailingchi on 15/12/30.
+// Copyright (c) 2016年 mrdaios
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 #import "HDTableViewManager+HDPrivateUtils.h"
 #import <objc/runtime.h>
@@ -19,15 +34,15 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
 {
     void (^tableViewDidSelectRowAtIndexPathWith)(UITableView *tableView, NSIndexPath *indexPath) =
         nil;
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
+    NSObject<HDTableViewConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewConfigureProtocol)])
     {
         tableViewDidSelectRowAtIndexPathWith = tableViewItem.tableViewDidSelectRowAtIndexPath;
     }
     if (!tableViewDidSelectRowAtIndexPathWith)
     {
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        NSObject<HDTableViewConfigureProtocol> *tableViewSection = self.sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewConfigureProtocol)])
         {
             tableViewDidSelectRowAtIndexPathWith =
                 tableViewSection.tableViewDidSelectRowAtIndexPath;
@@ -43,15 +58,16 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
 - (Class)loadClassWith:(NSIndexPath *)indexPath
 {
     Class cellClass = nil;
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
+    NSObject<HDTableViewCellConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
     {
         cellClass = tableViewItem.cellClass;
     }
     if (!cellClass)
     {
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        NSObject<HDTableViewCellConfigureProtocol> *tableViewSection =
+            self.sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
         {
             cellClass = tableViewSection.cellClass;
         }
@@ -70,15 +86,16 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
 - (NSString *)loadCellIdentifierWith:(NSIndexPath *)indexPath
 {
     NSString *cellIdentifier;
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
+    NSObject<HDTableViewCellConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
     {
         cellIdentifier = tableViewItem.cellIdentifier;
     }
     if (!cellIdentifier)
     {
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        NSObject<HDTableViewCellConfigureProtocol> *tableViewSection =
+            self.sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
         {
             cellIdentifier = tableViewSection.cellIdentifier;
         }
@@ -89,7 +106,7 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
     }
     if (!cellIdentifier)
     {
-        cellIdentifier = [[self loadClassWith:indexPath] hd_cellIdentifier];
+        cellIdentifier = [[self loadClassWith:indexPath] hd_ReusableCellIdentifier];
     }
     return cellIdentifier;
 }
@@ -97,15 +114,16 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
 - (UITableViewCellStyle)loadCellStyleWith:(NSIndexPath *)indexPath
 {
     UITableViewCellStyle cellStyle = UITableViewCellStyleUnknow;
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
+    NSObject<HDTableViewCellConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
     {
         cellStyle = tableViewItem.cellStyle;
     }
     if (cellStyle == UITableViewCellStyleUnknow)
     {
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        NSObject<HDTableViewCellConfigureProtocol> *tableViewSection =
+            self.sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
         {
             cellStyle = tableViewSection.cellStyle;
         }
@@ -124,15 +142,16 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
 - (CGFloat)loadCellHeightWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = HDTableViewManagerCellHeightUnknow;
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
+    NSObject<HDTableViewCellConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
     {
         height = tableViewItem.cellHeight;
     }
     if (height == HDTableViewManagerCellHeightUnknow)
     {
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        NSObject<HDTableViewCellConfigureProtocol> *tableViewSection =
+            self.sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
         {
             height = tableViewSection.cellHeight;
         }
@@ -153,15 +172,16 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
             NSIndexPath *indexPath))loadCellConfigureWith:(NSIndexPath *)indexPath
 {
     void (^cellConfigure)(id cell, id itemData, NSIndexPath *indexPath) = nil;
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
+    NSObject<HDTableViewCellConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
     {
         cellConfigure = tableViewItem.cellConfigure;
     }
     if (!cellConfigure)
     {
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        NSObject<HDTableViewCellConfigureProtocol> *tableViewSection =
+            self.sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
         {
             cellConfigure = tableViewSection.cellConfigure;
         }
@@ -177,15 +197,16 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
             NSIndexPath *indexPath))loadCellDidLoadHandlerWith:(NSIndexPath *)indexPath
 {
     void (^cellDidLoadHandler)(UITableView *tableView, id cell, NSIndexPath *indexPath) = nil;
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
+    NSObject<HDTableViewCellConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
     {
         cellDidLoadHandler = tableViewItem.cellDidLoadHandler;
     }
     if (!cellDidLoadHandler)
     {
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        NSObject<HDTableViewCellConfigureProtocol> *tableViewSection =
+            self.sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
         {
             cellDidLoadHandler = tableViewSection.cellDidLoadHandler;
         }
@@ -201,15 +222,16 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
             NSIndexPath *indexPath))loadCellWillAppearHandlerWith:(NSIndexPath *)indexPath
 {
     void (^cellWillAppearHandler)(UITableView *tableView, id cell, NSIndexPath *indexPath) = nil;
-    NSObject<HDTableViewItemProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
+    NSObject<HDTableViewCellConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
     {
         cellWillAppearHandler = tableViewItem.cellWillAppearHandler;
     }
     if (!cellWillAppearHandler)
     {
-        NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
+        NSObject<HDTableViewCellConfigureProtocol> *tableViewSection =
+            self.sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
         {
             cellWillAppearHandler = tableViewSection.cellWillAppearHandler;
         }
@@ -288,7 +310,7 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
     NSObject<HDTableViewItemProtocol> *tableViewItem = rows[indexPath.row];
     if ([tableViewItem conformsToProtocol:@protocol(HDTableViewItemProtocol)])
     {
-        item = tableViewItem.item;
+        item = tableViewItem.itemData;
     }
     else
     {

@@ -1,5 +1,5 @@
 //
-//  HDTableViewSection.h
+//  HDTableViewItem+Deprecated.h
 //
 // Copyright (c) 2016年 mrdaios
 //
@@ -21,20 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import "HDTableViewDefines.h"
+#import "HDTableViewItem.h"
 
-/**
- *  Section的配置
- */
-@interface HDTableViewSection
-    : NSObject <HDTableViewConfigureProtocol, HDTableViewCellConfigureProtocol,
-                HDTableViewSectionProtocol>
+@interface HDTableViewItem (Deprecated)
 
-/**
- *  内部有初始化
- *  self.items懒加载
- */
-+ (instancetype)section __attribute__((objc_requires_super));
+- (void)setItem:(id)item DEPRECATED_ATTRIBUTE;
+- (id)item DEPRECATED_ATTRIBUTE;
 
 @end

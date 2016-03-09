@@ -1,11 +1,27 @@
 //
 //  UITableViewCell+HDTableViewManager.m
-//  Pods
 //
-//  Created by Dailingchi on 15/7/15.
+// Copyright (c) 2016年 mrdaios
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
+#import "UITableViewCell+Deprecated.h"
 #import "UITableViewCell+HDTableViewManager.h"
 #import <objc/runtime.h>
 
@@ -29,14 +45,22 @@ static char *kHD_item = "kHD_item";
 #pragma mark
 #pragma mark Cell Config
 
-+ (NSString *)hd_cellIdentifier
++ (NSString *)hd_ReusableCellIdentifier
 {
-    return NSStringFromClass([self class]);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Wdeprecated-declarations"
+    NSString *hd_ReusableCellIdentifier = [self hd_cellIdentifier];
+#pragma clang diagnostic pop
+    if (hd_ReusableCellIdentifier.length <= 0)
+    {
+        hd_ReusableCellIdentifier = NSStringFromClass([self class]);
+    }
+    return hd_ReusableCellIdentifier;
 }
 
 + (NSString *)hd_nibName
 {
-    return [self hd_cellIdentifier];
+    return [self hd_ReusableCellIdentifier];
 }
 
 + (UINib *)hd_nib
@@ -161,7 +185,7 @@ static char *kHD_item = "kHD_item";
 {
     return [self hd_cellForTableView:tableView
                              fromNib:nib
-                          identifier:[self hd_cellIdentifier]
+                          identifier:[self hd_ReusableCellIdentifier]
                            indexPath:indexPath];
 }
 
@@ -222,7 +246,8 @@ static char *kHD_item = "kHD_item";
                 }
                 else
                 {
-                    NSAssert(false, @"not set reuseIdentifier for %@", [nibCell class]);
+                    NSAssert(false, @"xib(%@) not set reuseIdentifier for cellClass(%@)",
+                             [self hd_nibName], [nibCell class]);
                 }
             }
         }

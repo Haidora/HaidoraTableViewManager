@@ -28,6 +28,17 @@
 		AB62B1011C7C0663001CCE4E /* HDDemoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB62B1001C7C0663001CCE4E /* HDDemoViewModel.m */; };
 		AB62B1051C7C06F1001CCE4E /* ReadMe in Resources */ = {isa = PBXBuildFile; fileRef = AB62B1041C7C06F1001CCE4E /* ReadMe */; };
 		AB62B1091C7C08A0001CCE4E /* TitlePresentable.m in Sources */ = {isa = PBXBuildFile; fileRef = AB62B1081C7C08A0001CCE4E /* TitlePresentable.m */; };
+		AB63DD8C1C8FB66100DB5595 /* HDDemo2TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD8B1C8FB66100DB5595 /* HDDemo2TableViewController.m */; };
+		AB63DD8F1C8FB74F00DB5595 /* HDDemo2Item1.m in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD8E1C8FB74F00DB5595 /* HDDemo2Item1.m */; };
+		AB63DD921C8FB75B00DB5595 /* HDDemo2Item2.m in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD911C8FB75B00DB5595 /* HDDemo2Item2.m */; };
+		AB63DD961C8FB77600DB5595 /* HDDemo2Cell1.m in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD941C8FB77600DB5595 /* HDDemo2Cell1.m */; };
+		AB63DD971C8FB77600DB5595 /* HDDemo2Cell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB63DD951C8FB77600DB5595 /* HDDemo2Cell1.xib */; };
+		AB63DD9B1C8FB78200DB5595 /* HDDemo2Cell2.m in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD991C8FB78200DB5595 /* HDDemo2Cell2.m */; };
+		AB63DD9C1C8FB78200DB5595 /* HDDemo2Cell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB63DD9A1C8FB78200DB5595 /* HDDemo2Cell2.xib */; };
+		AB7480181C8ED8D800365F04 /* HDDemo1TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7480171C8ED8D800365F04 /* HDDemo1TableViewController.m */; };
+		AB74801B1C8ED8FB00365F04 /* HDDemo1Model.m in Sources */ = {isa = PBXBuildFile; fileRef = AB74801A1C8ED8FB00365F04 /* HDDemo1Model.m */; };
+		AB74801E1C8ED91300365F04 /* HDDemo1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB74801D1C8ED91300365F04 /* HDDemo1TableViewCell.m */; };
+		AB7480201C8ED91E00365F04 /* HDDemo1TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB74801F1C8ED91E00365F04 /* HDDemo1TableViewCell.xib */; };
 		ABFD20CC1C7C2B800046D116 /* ButtonPresentable.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFD20CB1C7C2B800046D116 /* ButtonPresentable.m */; };
 		F865F96F1519D6187900A9A8 /* libPods-HaidoraTableViewManager_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4D515E706D45D271342AED /* libPods-HaidoraTableViewManager_Tests.a */; };
 /* End PBXBuildFile section */
@@ -79,6 +90,25 @@
 		AB62B1041C7C06F1001CCE4E /* ReadMe */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe; sourceTree = "<group>"; };
 		AB62B1071C7C08A0001CCE4E /* TitlePresentable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitlePresentable.h; sourceTree = "<group>"; };
 		AB62B1081C7C08A0001CCE4E /* TitlePresentable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitlePresentable.m; sourceTree = "<group>"; };
+		AB63DD8A1C8FB66100DB5595 /* HDDemo2TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo2TableViewController.h; sourceTree = "<group>"; };
+		AB63DD8B1C8FB66100DB5595 /* HDDemo2TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemo2TableViewController.m; sourceTree = "<group>"; };
+		AB63DD8D1C8FB74F00DB5595 /* HDDemo2Item1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo2Item1.h; sourceTree = "<group>"; };
+		AB63DD8E1C8FB74F00DB5595 /* HDDemo2Item1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemo2Item1.m; sourceTree = "<group>"; };
+		AB63DD901C8FB75B00DB5595 /* HDDemo2Item2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo2Item2.h; sourceTree = "<group>"; };
+		AB63DD911C8FB75B00DB5595 /* HDDemo2Item2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemo2Item2.m; sourceTree = "<group>"; };
+		AB63DD931C8FB77600DB5595 /* HDDemo2Cell1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo2Cell1.h; sourceTree = "<group>"; };
+		AB63DD941C8FB77600DB5595 /* HDDemo2Cell1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemo2Cell1.m; sourceTree = "<group>"; };
+		AB63DD951C8FB77600DB5595 /* HDDemo2Cell1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HDDemo2Cell1.xib; sourceTree = "<group>"; };
+		AB63DD981C8FB78200DB5595 /* HDDemo2Cell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo2Cell2.h; sourceTree = "<group>"; };
+		AB63DD991C8FB78200DB5595 /* HDDemo2Cell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemo2Cell2.m; sourceTree = "<group>"; };
+		AB63DD9A1C8FB78200DB5595 /* HDDemo2Cell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HDDemo2Cell2.xib; sourceTree = "<group>"; };
+		AB7480161C8ED8D800365F04 /* HDDemo1TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo1TableViewController.h; sourceTree = "<group>"; };
+		AB7480171C8ED8D800365F04 /* HDDemo1TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemo1TableViewController.m; sourceTree = "<group>"; };
+		AB7480191C8ED8FB00365F04 /* HDDemo1Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo1Model.h; sourceTree = "<group>"; };
+		AB74801A1C8ED8FB00365F04 /* HDDemo1Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemo1Model.m; sourceTree = "<group>"; };
+		AB74801C1C8ED91300365F04 /* HDDemo1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo1TableViewCell.h; sourceTree = "<group>"; };
+		AB74801D1C8ED91300365F04 /* HDDemo1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemo1TableViewCell.m; sourceTree = "<group>"; };
+		AB74801F1C8ED91E00365F04 /* HDDemo1TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HDDemo1TableViewCell.xib; sourceTree = "<group>"; };
 		ABFD20CA1C7C2B800046D116 /* ButtonPresentable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPresentable.h; sourceTree = "<group>"; };
 		ABFD20CB1C7C2B800046D116 /* ButtonPresentable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonPresentable.m; sourceTree = "<group>"; };
 		C06DF38BF2E552ED3A88705D /* Pods-HaidoraTableViewManager_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaidoraTableViewManager_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HaidoraTableViewManager_Example/Pods-HaidoraTableViewManager_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +178,8 @@
 		6003F593195388D20070C39A /* Example for HaidoraTableViewManager */ = {
 			isa = PBXGroup;
 			children = (
+				AB63DD861C8FB64300DB5595 /* Demo2 */,
+				AB7480121C8ED8B900365F04 /* Demo1 */,
 				AB62B0EC1C7C05FF001CCE4E /* DemoModule */,
 				6003F59C195388D20070C39A /* HDAppDelegate.h */,
 				6003F59D195388D20070C39A /* HDAppDelegate.m */,
@@ -251,6 +283,87 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		AB63DD861C8FB64300DB5595 /* Demo2 */ = {
+			isa = PBXGroup;
+			children = (
+				AB63DD871C8FB64300DB5595 /* Model */,
+				AB63DD881C8FB64300DB5595 /* View */,
+				AB63DD891C8FB64300DB5595 /* ViewController */,
+			);
+			path = Demo2;
+			sourceTree = "<group>";
+		};
+		AB63DD871C8FB64300DB5595 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AB63DD881C8FB64300DB5595 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AB63DD8D1C8FB74F00DB5595 /* HDDemo2Item1.h */,
+				AB63DD8E1C8FB74F00DB5595 /* HDDemo2Item1.m */,
+				AB63DD901C8FB75B00DB5595 /* HDDemo2Item2.h */,
+				AB63DD911C8FB75B00DB5595 /* HDDemo2Item2.m */,
+				AB63DD931C8FB77600DB5595 /* HDDemo2Cell1.h */,
+				AB63DD941C8FB77600DB5595 /* HDDemo2Cell1.m */,
+				AB63DD951C8FB77600DB5595 /* HDDemo2Cell1.xib */,
+				AB63DD981C8FB78200DB5595 /* HDDemo2Cell2.h */,
+				AB63DD991C8FB78200DB5595 /* HDDemo2Cell2.m */,
+				AB63DD9A1C8FB78200DB5595 /* HDDemo2Cell2.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AB63DD891C8FB64300DB5595 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AB63DD8A1C8FB66100DB5595 /* HDDemo2TableViewController.h */,
+				AB63DD8B1C8FB66100DB5595 /* HDDemo2TableViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		AB7480121C8ED8B900365F04 /* Demo1 */ = {
+			isa = PBXGroup;
+			children = (
+				AB7480131C8ED8B900365F04 /* Model */,
+				AB7480141C8ED8B900365F04 /* View */,
+				AB7480151C8ED8B900365F04 /* ViewController */,
+			);
+			path = Demo1;
+			sourceTree = "<group>";
+		};
+		AB7480131C8ED8B900365F04 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AB7480191C8ED8FB00365F04 /* HDDemo1Model.h */,
+				AB74801A1C8ED8FB00365F04 /* HDDemo1Model.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AB7480141C8ED8B900365F04 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AB74801C1C8ED91300365F04 /* HDDemo1TableViewCell.h */,
+				AB74801D1C8ED91300365F04 /* HDDemo1TableViewCell.m */,
+				AB74801F1C8ED91E00365F04 /* HDDemo1TableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AB7480151C8ED8B900365F04 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AB7480161C8ED8D800365F04 /* HDDemo1TableViewController.h */,
+				AB7480171C8ED8D800365F04 /* HDDemo1TableViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		DA17DA1DD2A03C94BF6CBA6D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,7 +427,7 @@
 			attributes = {
 				CLASSPREFIX = HD;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = mrdaios;
 				TargetAttributes = {
 					6003F5AD195388D20070C39A = {
@@ -349,7 +462,10 @@
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				AB075D8B1C34C34100625CDB /* Launch Screen.storyboard in Resources */,
+				AB7480201C8ED91E00365F04 /* HDDemo1TableViewCell.xib in Resources */,
+				AB63DD9C1C8FB78200DB5595 /* HDDemo2Cell2.xib in Resources */,
 				AB62B1051C7C06F1001CCE4E /* ReadMe in Resources */,
+				AB63DD971C8FB77600DB5595 /* HDDemo2Cell1.xib in Resources */,
 				AB62B0F91C7C063A001CCE4E /* HDDemoTableViewCell.xib in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
@@ -463,13 +579,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB7480181C8ED8D800365F04 /* HDDemo1TableViewController.m in Sources */,
+				AB63DD9B1C8FB78200DB5595 /* HDDemo2Cell2.m in Sources */,
 				AB62B1011C7C0663001CCE4E /* HDDemoViewModel.m in Sources */,
+				AB74801E1C8ED91300365F04 /* HDDemo1TableViewCell.m in Sources */,
 				6003F59E195388D20070C39A /* HDAppDelegate.m in Sources */,
+				AB63DD8F1C8FB74F00DB5595 /* HDDemo2Item1.m in Sources */,
+				AB63DD921C8FB75B00DB5595 /* HDDemo2Item2.m in Sources */,
 				AB62B1091C7C08A0001CCE4E /* TitlePresentable.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				AB62B0F81C7C063A001CCE4E /* HDDemoTableViewCell.m in Sources */,
+				AB74801B1C8ED8FB00365F04 /* HDDemo1Model.m in Sources */,
 				AB62B0FD1C7C0650001CCE4E /* HDDemoTableViewController.m in Sources */,
+				AB63DD8C1C8FB66100DB5595 /* HDDemo2TableViewController.m in Sources */,
 				ABFD20CC1C7C2B800046D116 /* ButtonPresentable.m in Sources */,
+				AB63DD961C8FB77600DB5595 /* HDDemo2Cell1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +653,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -594,6 +719,7 @@
 				INFOPLIST_FILE = "HaidoraTableViewManager/HaidoraTableViewManager-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HaidoraTableViewManager/DemoModule/View/HaidoraTableViewManager_Example-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -612,6 +738,7 @@
 				INFOPLIST_FILE = "HaidoraTableViewManager/HaidoraTableViewManager-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HaidoraTableViewManager/DemoModule/View/HaidoraTableViewManager_Example-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
@@ -635,6 +762,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HaidoraTableViewManager_Example.app/HaidoraTableViewManager_Example";
 				WRAPPER_EXTENSION = xctest;
@@ -654,6 +782,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HaidoraTableViewManager_Example.app/HaidoraTableViewManager_Example";
 				WRAPPER_EXTENSION = xctest;

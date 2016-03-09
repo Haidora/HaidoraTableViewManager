@@ -82,8 +82,8 @@ pod "HaidoraTableViewManager"
 * iOS 7.0+
 * Objc/Swift
 
-## 致谢
-[RetableViewManager](https://github.com/romaonthego/RETableViewManager)
+## Inspired by these projects:
+* [RetableViewManager](https://github.com/romaonthego/RETableViewManager)
 
 ## Author
 

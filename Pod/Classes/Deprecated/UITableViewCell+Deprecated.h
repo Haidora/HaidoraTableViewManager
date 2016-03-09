@@ -1,5 +1,5 @@
 //
-//  HDTableViewSection.h
+//  UITableViewCell+Deprecated.h
 //
 // Copyright (c) 2016年 mrdaios
 //
@@ -21,20 +21,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import "HDTableViewDefines.h"
+#import <UIKit/UIKit.h>
+
+@interface UITableViewCell (HDTableViewManager_Deprecated)
 
 /**
- *  Section的配置
+ *  配置cell复用identifier
+ *
  */
-@interface HDTableViewSection
-    : NSObject <HDTableViewConfigureProtocol, HDTableViewCellConfigureProtocol,
-                HDTableViewSectionProtocol>
-
-/**
- *  内部有初始化
- *  self.items懒加载
- */
-+ (instancetype)section __attribute__((objc_requires_super));
++ (NSString *)hd_cellIdentifier DEPRECATED_ATTRIBUTE;
 
 @end

@@ -1,13 +1,28 @@
 //
 //  UITableViewCell+HDTableViewManager.h
-//  Pods
 //
-//  Created by Dailingchi on 15/7/15.
+// Copyright (c) 2016年 mrdaios
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface UITableViewCell (HDTableViewManager)
 
@@ -19,40 +34,34 @@
 #pragma mark Cell Config
 
 /**
- *  配置cell复用identifier
+ *  指定Cell的ReusableIdentifier
  *
+ *  @return 默认返回 NSStringFromClass([self class])
  */
-+ (NSString *)hd_cellIdentifier;
++ (NSString *)hd_ReusableCellIdentifier;
 
 /**
- *  配置nib的名称
- *
+ *  指定Cell需要加载nib的名称
  */
 + (NSString *)hd_nibName;
 
 /**
  *  创建nib
- *
  */
 + (UINib *)hd_nib;
 
 /**
  *  配置cell高度
- *
  */
 + (CGFloat)hd_cellHeight;
 
 /**
  *  根据内容配置高度
- *
  */
 + (CGFloat)hd_cellHeightForTableView:(UITableView *)tableView content:(id)content;
 
 /**
- *  配置cell内容
- *  content推荐用Protcol抽象Cell需要显示的数据,对Model做一次抽象,这样以后就做到了一个Cell对应多个Model。
- *  TODO:
- *      1.Protocol的声明暂时写在Cell的头部.
+ *  用数据配置Cell的UI
  */
 - (void)hd_setContent:(id)content;
 
