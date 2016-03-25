@@ -48,7 +48,7 @@ static char *kHD_item = "kHD_item";
 + (NSString *)hd_ReusableCellIdentifier
 {
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored"-Wdeprecated-declarations"
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     NSString *hd_ReusableCellIdentifier = [self hd_cellIdentifier];
 #pragma clang diagnostic pop
     if (hd_ReusableCellIdentifier.length <= 0)
@@ -244,12 +244,12 @@ static char *kHD_item = "kHD_item";
                     }
                     break;
                 }
-                else
-                {
-                    NSAssert(false, @"xib(%@) not set reuseIdentifier for cellClass(%@)",
-                             [self hd_nibName], [nibCell class]);
-                }
             }
+        }
+        if (nil == cell)
+        {
+            NSAssert(false, @"xib(%@) not set reuseIdentifier for cellClass(%@)", [self hd_nibName],
+                     [nib class]);
         }
     }
     cell.hd_tableView = tableView;

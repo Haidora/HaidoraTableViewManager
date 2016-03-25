@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "HaidoraTableViewManager"
-  s.version          = "2.0.4"
+  s.version          = "2.0.5"
   s.summary          = "a wrapper for UITableView."
   s.description      = <<-DESC
                       a wrapper for UITableViewDatasource and UITableViewDelegate.
