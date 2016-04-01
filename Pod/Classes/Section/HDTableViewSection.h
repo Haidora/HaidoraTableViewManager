@@ -1,5 +1,5 @@
 //
-//  HaidoraTableViewManager.h
+//  HDTableViewSection.h
 //
 // Copyright (c) 2016年 mrdaios
 //
@@ -21,18 +21,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef Pods_HaidoraTableViewManager_h
-#define Pods_HaidoraTableViewManager_h
+#import <Foundation/Foundation.h>
 
-//Manager
-#import "HDTableViewManager.h"
-#import "HDTableViewManager+UITableViewDataSource.h"
-#import "HDTableViewManager+UITableViewDelegate.h"
-//Section
-#import "HDTableViewSection.h"
-//Item
-#import "HDTableViewItem.h"
-//Cell
-#import "UITableViewCell+HDTableViewManager.h"
+#import "HDTableViewDefines.h"
 
-#endif
+/**
+ Section的配置
+ */
+@interface HDTableViewSection
+    : NSObject <HDTableViewConfigureProtocol, HDTableViewCellConfigureProtocol,
+                HDTableViewSectionProtocol>
+
+/**
+ 内部有初始化,self.items懒加载
+ */
++ (instancetype)section __attribute__((objc_requires_super));
+
+@end

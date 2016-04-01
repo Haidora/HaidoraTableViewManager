@@ -24,60 +24,75 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+/**
+ UITableViewCell的扩展,方便UITableViewCell的使用
+ */
 @interface UITableViewCell (HDTableViewManager)
 
+/**
+ Cell对应的tableView
+ */
 @property (nonatomic, weak, readwrite) UITableView *hd_tableView;
+
+/**
+ Cell对应的indexPath
+ */
 @property (nonatomic, strong, readwrite) NSIndexPath *hd_indexPath;
-@property (nonatomic, weak, readwrite) id hd_item;
 
 #pragma mark
 #pragma mark Cell Config
 
 /**
- *  指定Cell的ReusableIdentifier
- *
- *  @return 默认返回 NSStringFromClass([self class])
+ 指定Cell的ReusableIdentifier
+
+ @return 默认返回 NSStringFromClass([self class])
  */
 + (NSString *)hd_ReusableCellIdentifier;
 
 /**
- *  指定Cell需要加载nib的名称
- */
-+ (NSString *)hd_nibName;
+ 配置cell高度
 
-/**
- *  创建nib
- */
-+ (UINib *)hd_nib;
-
-/**
- *  配置cell高度
+ @return 默认44
  */
 + (CGFloat)hd_cellHeight;
 
 /**
- *  根据内容配置高度
+ 根据内容配置高度
+
+ @return 默认返回hd_cellHeight
  */
 + (CGFloat)hd_cellHeightForTableView:(UITableView *)tableView content:(id)content;
 
 /**
- *  用数据配置Cell的UI
+ 用数据配置Cell的UI,可自由发挥
  */
 - (void)hd_setContent:(id)content;
+
+#pragma mark Cell Config nib
+
+/**
+ 指定Cell需要加载nib的名称
+
+ @return 默认返回 NSStringFromClass([self class])
+ */
++ (NSString *)hd_nibName;
+
+/**
+ 创建nib
+
+ @return 默认通过hd_nibName加载
+ */
++ (UINib *)hd_nib;
 
 #pragma mark
 #pragma mark Load Cell
 
-/**
- *  根据style创建cell
- */
+#pragma mark Load Cell By code
+
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
                           withStyle:(UITableViewCellStyle)style
                           indexPath:(NSIndexPath *)indexPath;
 
-/**
- *  根据style和创建cell
- */
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
                           withStyle:(UITableViewCellStyle)style
                          identifier:(NSString *)identifier
@@ -87,28 +102,17 @@
                           withStyle:(UITableViewCellStyle)style
                          identifier:(NSString *)identifier
                           indexPath:(NSIndexPath *)indexPath
-                               item:(id)item;
-
-+ (instancetype)hd_cellForTableView:(UITableView *)tableView
-                          withStyle:(UITableViewCellStyle)style
-                         identifier:(NSString *)identifier
-                          indexPath:(NSIndexPath *)indexPath
-                               item:(id)item
                      didLoadHandler:(void (^)(UITableView *tableView, id cell,
                                               NSIndexPath *indexPath))didLoadHandler
                   willAppearHandler:(void (^)(UITableView *tableView, id cell,
                                               NSIndexPath *indexPath))willAppearHandler;
 
-/**
- *  根据nib创建cell
- */
+#pragma mark Load Cell By nib
+
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
                             fromNib:(UINib *)nib
                           indexPath:(NSIndexPath *)indexPath;
 
-/**
- *  根据nib和identifier创建cell
- */
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
                             fromNib:(UINib *)nib
                          identifier:(NSString *)identifier
@@ -118,13 +122,6 @@
                             fromNib:(UINib *)nib
                          identifier:(NSString *)identifier
                           indexPath:(NSIndexPath *)indexPath
-                               item:(id)item;
-
-+ (instancetype)hd_cellForTableView:(UITableView *)tableView
-                            fromNib:(UINib *)nib
-                         identifier:(NSString *)identifier
-                          indexPath:(NSIndexPath *)indexPath
-                               item:(id)item
                      didLoadHandler:(void (^)(UITableView *tableView, id cell,
                                               NSIndexPath *indexPath))didLoadHandler
                   willAppearHandler:(void (^)(UITableView *tableView, id cell,
@@ -134,12 +131,12 @@
 #pragma mark Life Cycle
 
 /**
- *  cell创建以后调用
+ cell创建以后调用
  */
 - (void)hd_cellDidLoad __attribute__((objc_requires_super));
 
 /**
- *  cell显示时调用
+ cell显示时调用
  */
 - (void)hd_cellWillAppear __attribute__((objc_requires_super));
 

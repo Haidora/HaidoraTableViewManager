@@ -25,10 +25,46 @@
 
 @interface UITableViewCell (HDTableViewManager_Deprecated)
 
+@property (nonatomic, weak, readwrite) id hd_item DEPRECATED_ATTRIBUTE;
+
 /**
  *  配置cell复用identifier
  *
  */
 + (NSString *)hd_cellIdentifier DEPRECATED_ATTRIBUTE;
+
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
+                          withStyle:(UITableViewCellStyle)style
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item DEPRECATED_ATTRIBUTE;
+
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
+                          withStyle:(UITableViewCellStyle)style
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item
+                     didLoadHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))didLoadHandler
+                  willAppearHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))willAppearHandler
+    DEPRECATED_ATTRIBUTE;
+
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
+                            fromNib:(UINib *)nib
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item DEPRECATED_ATTRIBUTE;
+
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
+                            fromNib:(UINib *)nib
+                         identifier:(NSString *)identifier
+                          indexPath:(NSIndexPath *)indexPath
+                               item:(id)item
+                     didLoadHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))didLoadHandler
+                  willAppearHandler:(void (^)(UITableView *tableView, id cell,
+                                              NSIndexPath *indexPath))willAppearHandler
+    DEPRECATED_ATTRIBUTE;
 
 @end

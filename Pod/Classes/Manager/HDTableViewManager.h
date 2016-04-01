@@ -1,5 +1,5 @@
 //
-//  HDTableViewManager.m
+//  HDTableViewManager.h
 //
 // Copyright (c) 2016年 mrdaios
 //
@@ -23,14 +23,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 #import "HDTableViewDefines.h"
 
 /**
- *  UITableVieDataSource 和 UITableViewDelegate的封装.
+ UITableVieDataSource 和 UITableViewDelegate的封装.
  */
 @interface HDTableViewManager
-    : NSObject <HDTableViewConfigureProtocol, HDTableViewCellConfigureProtocol,
-                UITableViewDataSource, UITableViewDelegate>
+    : NSObject <HDTableViewConfigureProtocol, HDTableViewCellConfigureProtocol>
 
 /**
  *  对应UITableView中的sections.(元素需要实现<HDTableViewConfigureProtocol,

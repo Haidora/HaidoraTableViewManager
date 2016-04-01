@@ -1,5 +1,5 @@
 //
-//  HDTableViewItem.h
+//  HDTableViewManager+UITableViewDataSource.h
 //
 // Copyright (c) 2016年 mrdaios
 //
@@ -22,17 +22,10 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "HDTableViewDefines.h"
+#import <UIKit/UIKit.h>
 
-/**
- *  Cell的配置
- */
-@interface HDTableViewItem : NSObject <HDTableViewConfigureProtocol,
-                                       HDTableViewCellConfigureProtocol, HDTableViewItemProtocol>
+#import "HDTableViewManager.h"
 
-/**
- *  内部有初始化
- */
-+ (instancetype)item __attribute__((objc_requires_super));
+@interface HDTableViewManager (UITableViewDataSource) <UITableViewDataSource>
 
 @end

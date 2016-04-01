@@ -259,7 +259,6 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
                                       fromNib:nib
                                    identifier:cellellIdentifier
                                     indexPath:indexPath
-                                         item:[self itemAtIndexPath:indexPath]
                                didLoadHandler:cellDidLoadHandler
                             willAppearHandler:cellWillAppearHandler];
     }
@@ -272,7 +271,6 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
                                         withStyle:cellStyle
                                        identifier:cellellIdentifier
                                         indexPath:indexPath
-                                             item:[self itemAtIndexPath:indexPath]
                                    didLoadHandler:cellDidLoadHandler
                                 willAppearHandler:cellWillAppearHandler];
         }
