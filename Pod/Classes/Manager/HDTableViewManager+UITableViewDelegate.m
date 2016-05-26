@@ -88,9 +88,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     CGFloat height = UITableViewAutomaticDimension;
-    if ([self.delegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)])
+    if ([self.delegate respondsToSelector:@selector(tableView:heightForFooterInSection:)])
     {
-        height = [self.delegate tableView:tableView heightForHeaderInSection:section];
+        height = [self.delegate tableView:tableView heightForFooterInSection:section];
     }
     else
     {
