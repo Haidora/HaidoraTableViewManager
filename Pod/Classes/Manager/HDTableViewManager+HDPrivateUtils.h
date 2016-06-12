@@ -32,6 +32,9 @@
 #pragma mark
 #pragma mark HDTableViewConfigureProtocol
 
+- (void (^)(UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath))
+loadTableViewWillDisplayCellAtIndexPath:(NSIndexPath *)indexPath;
+
 - (void (^)(UITableView *tableView, NSIndexPath *indexPath))
 loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath;
 

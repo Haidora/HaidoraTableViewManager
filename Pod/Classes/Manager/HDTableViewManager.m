@@ -39,6 +39,7 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
 #pragma mark HDTableViewConfigureProtocol
 
 @synthesize tableViewDidSelectRowAtIndexPath = _tableViewDidSelectRowAtIndexPath;
+@synthesize tableViewWillDisplayCellAtIndexPath = _tableViewWillDisplayCellAtIndexPath;
 
 #pragma mark
 #pragma mark HDTableViewCellConfigureProtocol

@@ -237,6 +237,10 @@ static char *kHD_indexPath = "kHD_indexPath";
 {
 }
 
+- (void)hd_cellWillDisplay
+{
+}
+
 #pragma mark
 #pragma mark Setter/Getter
 

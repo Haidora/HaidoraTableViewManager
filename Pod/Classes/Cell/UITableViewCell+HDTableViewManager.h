@@ -136,8 +136,13 @@
 - (void)hd_cellDidLoad __attribute__((objc_requires_super));
 
 /**
- cell显示时调用
+ cell显示时调用(cellForRowAtIndexPath)
  */
 - (void)hd_cellWillAppear __attribute__((objc_requires_super));
+
+/**
+ *  tableView:willDisplayCell:forRowAtIndexPath:
+ */
+- (void)hd_cellWillDisplay __attribute__((objc_requires_super));
 
 @end

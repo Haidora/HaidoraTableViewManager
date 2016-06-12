@@ -224,4 +224,31 @@
     }
 }
 
+#pragma mark
+#pragma mark UITableViewDelegate optional Display customization
+
+- (void)tableView:(UITableView *)tableView
+  willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.delegate respondsToSelector:@selector(tableView:willDisplayCell:forRowAtIndexPath:)])
+    {
+        [self.delegate tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    }
+    else
+    {
+        void (^tableViewWillDisplayCellAtIndexPath)(UITableView *tableView, UITableViewCell *cell,
+                                                    NSIndexPath *indexPath) =
+            [self loadTableViewWillDisplayCellAtIndexPath:indexPath];
+        if (tableViewWillDisplayCellAtIndexPath)
+        {
+            tableViewWillDisplayCellAtIndexPath(tableView, cell, indexPath);
+        }
+        else
+        {
+            [cell hd_cellWillDisplay];
+        }
+    }
+}
+
 @end

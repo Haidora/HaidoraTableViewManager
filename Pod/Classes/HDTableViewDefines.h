@@ -48,14 +48,24 @@ extern const CGFloat HDTableViewManagerCellHeightUnknow;
 
 @optional
 /**
- TableView的-tableView:didSelectRowAtIndexPath:回调
+ TableView的tableView:didSelectRowAtIndexPath:回调
 
  配置加载顺序 item>section>manager
 
- @see -tableView:didSelectRowAtIndexPath:
+ @see tableView:didSelectRowAtIndexPath:
  */
 @property (nonatomic, copy, readwrite) void (^tableViewDidSelectRowAtIndexPath)
     (UITableView *tableView, NSIndexPath *indexPath);
+
+/**
+ TableView的tableView:willDisplayCell:forRowAtIndexPath:回调
+
+ 配置加载顺序 item>section>manager
+
+ @see tableView:willDisplayCell:forRowAtIndexPath::
+ */
+@property (nonatomic, copy, readwrite) void (^tableViewWillDisplayCellAtIndexPath)
+    (UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
 
 @end
 
@@ -134,7 +144,7 @@ extern const CGFloat HDTableViewManagerCellHeightUnknow;
 /**
  TableViewCell创建后回调
 
- 配置加载顺序 item>section>manager
+ 配置加载顺序 item>section>manager>hd_cellWillDisplay
 
  @param tableView    cell所在的tableView
  @param cell         对应的cell

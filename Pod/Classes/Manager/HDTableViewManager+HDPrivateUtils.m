@@ -29,6 +29,32 @@ static char *kHDTableViewSection_HDPrivateUtilsExtend_nibCache =
 
 @implementation HDTableViewManager (HDPrivateUtils)
 
+- (void (^)(UITableView *tableView, UITableViewCell *cell,
+            NSIndexPath *indexPath))loadTableViewWillDisplayCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    void (^tableViewWillDisplayCellAtIndexPath)(UITableView *tableView, UITableViewCell *cell,
+                                                NSIndexPath *indexPath) = nil;
+    NSObject<HDTableViewConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewConfigureProtocol)])
+    {
+        tableViewWillDisplayCellAtIndexPath = tableViewItem.tableViewWillDisplayCellAtIndexPath;
+    }
+    if (!tableViewWillDisplayCellAtIndexPath)
+    {
+        NSObject<HDTableViewConfigureProtocol> *tableViewSection = self.sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewConfigureProtocol)])
+        {
+            tableViewWillDisplayCellAtIndexPath =
+                tableViewSection.tableViewWillDisplayCellAtIndexPath;
+        }
+    }
+    if (!tableViewWillDisplayCellAtIndexPath)
+    {
+        tableViewWillDisplayCellAtIndexPath = self.tableViewWillDisplayCellAtIndexPath;
+    }
+    return tableViewWillDisplayCellAtIndexPath;
+}
+
 - (void (^)(UITableView *tableView, NSIndexPath *indexPath))
 loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
 {
