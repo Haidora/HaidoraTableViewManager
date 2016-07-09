@@ -184,6 +184,10 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
     }
     if (height == HDTableViewManagerCellHeightUnknow)
     {
+        height = self.cellHeight;
+    }
+    if (height == HDTableViewManagerCellHeightUnknow)
+    {
         Class cellClass = [self loadClassWith:indexPath];
         if ([cellClass isSubclassOfClass:[UITableViewCell class]])
         {

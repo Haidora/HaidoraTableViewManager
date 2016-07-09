@@ -55,6 +55,17 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
 #pragma mark
 #pragma mark Init
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        self.cellHeight = HDTableViewManagerCellHeightUnknow;
+        self.cellStyle = UITableViewCellStyleUnknow;
+    }
+    return self;
+}
+
 - (instancetype)initWithSections:(NSMutableArray *)sections
                        cellClass:(Class)cellClass
                        cellStyle:(UITableViewCellStyle)cellStyle
@@ -65,12 +76,11 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
     self = [self init];
     if (self)
     {
-        _sections = sections;
-        _cellClass = cellClass;
-        _cellStyle = cellStyle;
-        _cellConfigure = [cellConfigure copy];
-        _cellHeight = HDTableViewManagerCellHeightUnknow;
-        _delegate = delegate;
+        self.sections = sections;
+        self.cellClass = cellClass;
+        self.cellStyle = cellStyle;
+        self.cellConfigure = [cellConfigure copy];
+        self.delegate = delegate;
     }
     return self;
 }
