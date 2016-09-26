@@ -21,8 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "HDTableViewManager+UITableViewDataSource.h"
-
 #import "HDTableViewManager+HDPrivateUtils.h"
 
 @implementation HDTableViewManager (UITableViewDataSource)
@@ -34,17 +32,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numberOfRows = 0;
     NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[section];
-    if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
-    {
-        numberOfRows = [tableViewSection items].count;
-    }
-    else
-    {
-        NSAssert(NO, @"%@ need conforms to HDTableViewSectionProtocol", [tableViewSection class]);
-    }
-    return numberOfRows;
+    NSAssert([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)],
+             @"%@ need conforms to HDTableViewSectionProtocol", [tableViewSection class]);
+    return [[tableViewSection items] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView

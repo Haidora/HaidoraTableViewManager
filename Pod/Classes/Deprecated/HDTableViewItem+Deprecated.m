@@ -27,12 +27,13 @@
 
 - (void)setItem:(id)item
 {
-    self.itemData = item;
+    NSAssert(NO, @"用HDTableViewItemProtocol的itemData代替.");
 }
 
 - (id)item
 {
-    return self.itemData;
+    NSAssert(NO, @"用HDTableViewItemProtocol的itemData代替.");
+    return nil;
 }
 
 @end

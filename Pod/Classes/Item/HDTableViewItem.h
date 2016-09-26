@@ -21,14 +21,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "HDTableViewDefines.h"
 #import <Foundation/Foundation.h>
+
+#import "HDTableViewItemProtocol.h"
 
 /**
  Cell的配置
  */
-@interface HDTableViewItem : NSObject <HDTableViewConfigureProtocol,
-                                       HDTableViewCellConfigureProtocol, HDTableViewItemProtocol>
+@interface HDTableViewItem : NSObject <HDTableViewItemProtocol>
 
 /**
  内部有初始化

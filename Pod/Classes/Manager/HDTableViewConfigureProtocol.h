@@ -1,5 +1,5 @@
 //
-//  HDTableViewManager+UITableViewDelegate.h
+//  HDTableViewConfigureProtocol.h
 //
 // Copyright (c) 2016年 mrdaios
 //
@@ -22,10 +22,34 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
-#import "HDTableViewManager.h"
+#pragma mark
+#pragma mark HDTableViewConfigureProtocol
 
-@interface HDTableViewManager (UITableViewDelegate) <UITableViewDelegate>
+/**
+ *  HDTableViewManager配置UITableView相关属性
+ */
+@protocol HDTableViewConfigureProtocol <NSObject>
+
+@optional
+/**
+ TableView的tableView:didSelectRowAtIndexPath:回调配置加载顺序
+
+ item>section>manager
+
+ @see tableView:didSelectRowAtIndexPath:
+ */
+@property (nonatomic, copy, readwrite) void (^tableViewDidSelectRowAtIndexPath)
+    (UITableView *tableView, NSIndexPath *indexPath);
+
+/**
+ TableView的tableView:willDisplayCell:forRowAtIndexPath:回调配置加载顺序
+
+ item>section>manager
+
+ @see tableView:willDisplayCell:forRowAtIndexPath::
+ */
+@property (nonatomic, copy, readwrite) void (^tableViewWillDisplayCellAtIndexPath)
+    (UITableView *tableView, UITableViewCell *cell, NSIndexPath *indexPath);
 
 @end

@@ -1,5 +1,5 @@
 //
-//  HDTableViewManager+UITableViewDataSource.h
+//  HDTableViewItemProtocol.h
 //
 // Copyright (c) 2016年 mrdaios
 //
@@ -22,10 +22,24 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
-#import "HDTableViewManager.h"
+#import "HDTableViewCellConfigureProtocol.h"
+#import "HDTableViewConfigureProtocol.h"
 
-@interface HDTableViewManager (UITableViewDataSource) <UITableViewDataSource>
+#pragma mark
+#pragma mark HDTableViewItemProtocol
+/**
+ *  用于配置TableViewCell相关属性
+ */
+@protocol HDTableViewItemProtocol <HDTableViewConfigureProtocol, HDTableViewCellConfigureProtocol>
+
+@required
+/**
+ cell对应的数据
+ */
+@property (nonatomic, strong, readwrite) id itemData;
+
+@optional
+@property (nonatomic, strong, readwrite) id item DEPRECATED_ATTRIBUTE;
 
 @end

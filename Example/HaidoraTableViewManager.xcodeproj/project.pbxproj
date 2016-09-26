@@ -22,12 +22,6 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		AB075D8B1C34C34100625CDB /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB075D8A1C34C34100625CDB /* Launch Screen.storyboard */; };
-		AB62B0F81C7C063A001CCE4E /* HDDemoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB62B0F61C7C063A001CCE4E /* HDDemoTableViewCell.m */; };
-		AB62B0F91C7C063A001CCE4E /* HDDemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB62B0F71C7C063A001CCE4E /* HDDemoTableViewCell.xib */; };
-		AB62B0FD1C7C0650001CCE4E /* HDDemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB62B0FB1C7C0650001CCE4E /* HDDemoTableViewController.m */; };
-		AB62B1011C7C0663001CCE4E /* HDDemoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB62B1001C7C0663001CCE4E /* HDDemoViewModel.m */; };
-		AB62B1051C7C06F1001CCE4E /* ReadMe in Resources */ = {isa = PBXBuildFile; fileRef = AB62B1041C7C06F1001CCE4E /* ReadMe */; };
-		AB62B1091C7C08A0001CCE4E /* TitlePresentable.m in Sources */ = {isa = PBXBuildFile; fileRef = AB62B1081C7C08A0001CCE4E /* TitlePresentable.m */; };
 		AB63DD8C1C8FB66100DB5595 /* HDDemo2TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD8B1C8FB66100DB5595 /* HDDemo2TableViewController.m */; };
 		AB63DD8F1C8FB74F00DB5595 /* HDDemo2Item1.m in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD8E1C8FB74F00DB5595 /* HDDemo2Item1.m */; };
 		AB63DD921C8FB75B00DB5595 /* HDDemo2Item2.m in Sources */ = {isa = PBXBuildFile; fileRef = AB63DD911C8FB75B00DB5595 /* HDDemo2Item2.m */; };
@@ -39,7 +33,6 @@
 		AB74801B1C8ED8FB00365F04 /* HDDemo1Model.m in Sources */ = {isa = PBXBuildFile; fileRef = AB74801A1C8ED8FB00365F04 /* HDDemo1Model.m */; };
 		AB74801E1C8ED91300365F04 /* HDDemo1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB74801D1C8ED91300365F04 /* HDDemo1TableViewCell.m */; };
 		AB7480201C8ED91E00365F04 /* HDDemo1TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB74801F1C8ED91E00365F04 /* HDDemo1TableViewCell.xib */; };
-		ABFD20CC1C7C2B800046D116 /* ButtonPresentable.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFD20CB1C7C2B800046D116 /* ButtonPresentable.m */; };
 		F865F96F1519D6187900A9A8 /* libPods-HaidoraTableViewManager_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4D515E706D45D271342AED /* libPods-HaidoraTableViewManager_Tests.a */; };
 /* End PBXBuildFile section */
 
@@ -73,23 +66,13 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		6AE802E70C7B5179F65B9E83 /* HaidoraTableViewManager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HaidoraTableViewManager.podspec; path = ../HaidoraTableViewManager.podspec; sourceTree = "<group>"; };
+		6AE802E70C7B5179F65B9E83 /* HaidoraTableViewManager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HaidoraTableViewManager.podspec; path = ../HaidoraTableViewManager.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7115518C8ED25CF0F882099C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		72554009243D2855FC50F458 /* libPods-HaidoraTableViewManager_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HaidoraTableViewManager_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8D4D515E706D45D271342AED /* libPods-HaidoraTableViewManager_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HaidoraTableViewManager_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2576A31CA9C394CD3CFEF7F /* Pods-HaidoraTableViewManager_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaidoraTableViewManager_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HaidoraTableViewManager_Tests/Pods-HaidoraTableViewManager_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		AB075D8A1C34C34100625CDB /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		AB62B0F51C7C063A001CCE4E /* HDDemoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemoTableViewCell.h; sourceTree = "<group>"; };
-		AB62B0F61C7C063A001CCE4E /* HDDemoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemoTableViewCell.m; sourceTree = "<group>"; };
-		AB62B0F71C7C063A001CCE4E /* HDDemoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HDDemoTableViewCell.xib; sourceTree = "<group>"; };
-		AB62B0FA1C7C0650001CCE4E /* HDDemoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemoTableViewController.h; sourceTree = "<group>"; };
-		AB62B0FB1C7C0650001CCE4E /* HDDemoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemoTableViewController.m; sourceTree = "<group>"; };
-		AB62B0FF1C7C0663001CCE4E /* HDDemoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemoViewModel.h; sourceTree = "<group>"; };
-		AB62B1001C7C0663001CCE4E /* HDDemoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemoViewModel.m; sourceTree = "<group>"; };
-		AB62B1041C7C06F1001CCE4E /* ReadMe */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe; sourceTree = "<group>"; };
-		AB62B1071C7C08A0001CCE4E /* TitlePresentable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitlePresentable.h; sourceTree = "<group>"; };
-		AB62B1081C7C08A0001CCE4E /* TitlePresentable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitlePresentable.m; sourceTree = "<group>"; };
 		AB63DD8A1C8FB66100DB5595 /* HDDemo2TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo2TableViewController.h; sourceTree = "<group>"; };
 		AB63DD8B1C8FB66100DB5595 /* HDDemo2TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemo2TableViewController.m; sourceTree = "<group>"; };
 		AB63DD8D1C8FB74F00DB5595 /* HDDemo2Item1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo2Item1.h; sourceTree = "<group>"; };
@@ -109,8 +92,6 @@
 		AB74801C1C8ED91300365F04 /* HDDemo1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDemo1TableViewCell.h; sourceTree = "<group>"; };
 		AB74801D1C8ED91300365F04 /* HDDemo1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDemo1TableViewCell.m; sourceTree = "<group>"; };
 		AB74801F1C8ED91E00365F04 /* HDDemo1TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HDDemo1TableViewCell.xib; sourceTree = "<group>"; };
-		ABFD20CA1C7C2B800046D116 /* ButtonPresentable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPresentable.h; sourceTree = "<group>"; };
-		ABFD20CB1C7C2B800046D116 /* ButtonPresentable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonPresentable.m; sourceTree = "<group>"; };
 		C06DF38BF2E552ED3A88705D /* Pods-HaidoraTableViewManager_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaidoraTableViewManager_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HaidoraTableViewManager_Example/Pods-HaidoraTableViewManager_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F312FCB8806669267C2130F2 /* Pods-HaidoraTableViewManager_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaidoraTableViewManager_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HaidoraTableViewManager_Tests/Pods-HaidoraTableViewManager_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,7 +161,6 @@
 			children = (
 				AB63DD861C8FB64300DB5595 /* Demo2 */,
 				AB7480121C8ED8B900365F04 /* Demo1 */,
-				AB62B0EC1C7C05FF001CCE4E /* DemoModule */,
 				6003F59C195388D20070C39A /* HDAppDelegate.h */,
 				6003F59D195388D20070C39A /* HDAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -230,57 +210,6 @@
 				7115518C8ED25CF0F882099C /* LICENSE */,
 			);
 			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
-		AB62B0EC1C7C05FF001CCE4E /* DemoModule */ = {
-			isa = PBXGroup;
-			children = (
-				AB62B1021C7C068F001CCE4E /* Protocol */,
-				AB62B0ED1C7C05FF001CCE4E /* View */,
-				AB62B0EE1C7C05FF001CCE4E /* ViewController */,
-				AB62B0EF1C7C05FF001CCE4E /* ViewModel */,
-				AB62B1041C7C06F1001CCE4E /* ReadMe */,
-			);
-			path = DemoModule;
-			sourceTree = "<group>";
-		};
-		AB62B0ED1C7C05FF001CCE4E /* View */ = {
-			isa = PBXGroup;
-			children = (
-				AB62B0F51C7C063A001CCE4E /* HDDemoTableViewCell.h */,
-				AB62B0F61C7C063A001CCE4E /* HDDemoTableViewCell.m */,
-				AB62B0F71C7C063A001CCE4E /* HDDemoTableViewCell.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		AB62B0EE1C7C05FF001CCE4E /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				AB62B0FA1C7C0650001CCE4E /* HDDemoTableViewController.h */,
-				AB62B0FB1C7C0650001CCE4E /* HDDemoTableViewController.m */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		AB62B0EF1C7C05FF001CCE4E /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				AB62B0FF1C7C0663001CCE4E /* HDDemoViewModel.h */,
-				AB62B1001C7C0663001CCE4E /* HDDemoViewModel.m */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		AB62B1021C7C068F001CCE4E /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				AB62B1071C7C08A0001CCE4E /* TitlePresentable.h */,
-				AB62B1081C7C08A0001CCE4E /* TitlePresentable.m */,
-				ABFD20CA1C7C2B800046D116 /* ButtonPresentable.h */,
-				ABFD20CB1C7C2B800046D116 /* ButtonPresentable.m */,
-			);
-			path = Protocol;
 			sourceTree = "<group>";
 		};
 		AB63DD861C8FB64300DB5595 /* Demo2 */ = {
@@ -427,7 +356,7 @@
 			attributes = {
 				CLASSPREFIX = HD;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = mrdaios;
 				TargetAttributes = {
 					6003F5AD195388D20070C39A = {
@@ -464,9 +393,7 @@
 				AB075D8B1C34C34100625CDB /* Launch Screen.storyboard in Resources */,
 				AB7480201C8ED91E00365F04 /* HDDemo1TableViewCell.xib in Resources */,
 				AB63DD9C1C8FB78200DB5595 /* HDDemo2Cell2.xib in Resources */,
-				AB62B1051C7C06F1001CCE4E /* ReadMe in Resources */,
 				AB63DD971C8FB77600DB5595 /* HDDemo2Cell1.xib in Resources */,
-				AB62B0F91C7C063A001CCE4E /* HDDemoTableViewCell.xib in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,18 +508,13 @@
 			files = (
 				AB7480181C8ED8D800365F04 /* HDDemo1TableViewController.m in Sources */,
 				AB63DD9B1C8FB78200DB5595 /* HDDemo2Cell2.m in Sources */,
-				AB62B1011C7C0663001CCE4E /* HDDemoViewModel.m in Sources */,
 				AB74801E1C8ED91300365F04 /* HDDemo1TableViewCell.m in Sources */,
 				6003F59E195388D20070C39A /* HDAppDelegate.m in Sources */,
 				AB63DD8F1C8FB74F00DB5595 /* HDDemo2Item1.m in Sources */,
 				AB63DD921C8FB75B00DB5595 /* HDDemo2Item2.m in Sources */,
-				AB62B1091C7C08A0001CCE4E /* TitlePresentable.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				AB62B0F81C7C063A001CCE4E /* HDDemoTableViewCell.m in Sources */,
 				AB74801B1C8ED8FB00365F04 /* HDDemo1Model.m in Sources */,
-				AB62B0FD1C7C0650001CCE4E /* HDDemoTableViewController.m in Sources */,
 				AB63DD8C1C8FB66100DB5595 /* HDDemo2TableViewController.m in Sources */,
-				ABFD20CC1C7C2B800046D116 /* ButtonPresentable.m in Sources */,
 				AB63DD961C8FB77600DB5595 /* HDDemo2Cell1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -648,14 +570,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -668,7 +595,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -688,20 +615,25 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

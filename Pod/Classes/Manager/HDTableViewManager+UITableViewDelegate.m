@@ -21,9 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "HDTableViewManager+UITableViewDelegate.h"
-
 #import "HDTableViewManager+HDPrivateUtils.h"
+#import "UITableViewCell+HDTableViewManager.h"
 
 @implementation HDTableViewManager (UITableViewDelegate)
 
@@ -237,16 +236,13 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     }
     else
     {
+        [cell hd_cellWillDisplay];
         void (^tableViewWillDisplayCellAtIndexPath)(UITableView *tableView, UITableViewCell *cell,
                                                     NSIndexPath *indexPath) =
             [self loadTableViewWillDisplayCellAtIndexPath:indexPath];
         if (tableViewWillDisplayCellAtIndexPath)
         {
             tableViewWillDisplayCellAtIndexPath(tableView, cell, indexPath);
-        }
-        else
-        {
-            [cell hd_cellWillDisplay];
         }
     }
 }

@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "HDTableViewManager+HDPrivateUtils.h"
+#import "UITableViewCell+HDTableViewManager.h"
 #import <objc/runtime.h>
 
 static char *kHDTableViewSection_HDPrivateUtilsExtend_nibCache =

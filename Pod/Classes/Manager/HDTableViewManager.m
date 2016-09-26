@@ -22,7 +22,6 @@
 // THE SOFTWARE.
 
 #import "HDTableViewManager+HDPrivateUtils.h"
-#import "HDTableViewManager+UITableViewDataSource.h"
 #import "HDTableViewManager.h"
 #import "UITableViewCell+HDTableViewManager.h"
 
@@ -31,6 +30,9 @@ const UITableViewCellStyle UITableViewCellStyleUnknow = -7;
 const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
 
 @interface HDTableViewManager ()
+
+@property (nonatomic, strong, readwrite) NSMutableArray *sections;
+
 @end
 
 @implementation HDTableViewManager
@@ -76,7 +78,7 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
     self = [self init];
     if (self)
     {
-        self.sections = sections;
+        //        self.sections = sections;
         self.cellClass = cellClass;
         self.cellStyle = cellStyle;
         self.cellConfigure = [cellConfigure copy];
@@ -196,4 +198,122 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
     height = size.height + 1;
     return height;
 }
+@end
+
+#pragma mark HDTableViewManager-HDTableViewSection
+@implementation HDTableViewManager (HDTableViewSection)
+
+- (void)addSection:(HDTableViewSection *)section
+{
+    [self.sections addObject:section];
+}
+
+- (void)addSectionsFromArray:(NSArray *)array
+{
+    [self.sections addObjectsFromArray:array];
+}
+
+- (void)insertSection:(HDTableViewSection *)section atIndex:(NSUInteger)index
+{
+    [self.sections insertObject:section atIndex:index];
+}
+
+- (void)insertSections:(NSArray *)sections atIndexes:(NSIndexSet *)indexes
+{
+    [self.sections insertObjects:sections atIndexes:indexes];
+}
+
+- (void)removeSection:(HDTableViewSection *)section
+{
+    [self.sections removeObject:section];
+}
+
+- (void)removeAllSections
+{
+    [self.sections removeAllObjects];
+}
+
+- (void)removeSectionIdenticalTo:(HDTableViewSection *)section inRange:(NSRange)range
+{
+    [self.sections removeObjectIdenticalTo:section inRange:range];
+}
+
+- (void)removeSectionIdenticalTo:(HDTableViewSection *)section
+{
+    [self.sections removeObjectIdenticalTo:section];
+}
+
+- (void)removeSectionsInArray:(NSArray *)otherArray
+{
+    [self.sections removeObjectsInArray:otherArray];
+}
+
+- (void)removeSectionsInRange:(NSRange)range
+{
+    [self.sections removeObjectsInRange:range];
+}
+
+- (void)removeSection:(HDTableViewSection *)section inRange:(NSRange)range
+{
+    [self.sections removeObject:section inRange:range];
+}
+
+- (void)removeLastSection
+{
+    [self.sections removeLastObject];
+}
+
+- (void)removeSectionAtIndex:(NSUInteger)index
+{
+    [self.sections removeObjectAtIndex:index];
+}
+
+- (void)removeSectionsAtIndexes:(NSIndexSet *)indexes
+{
+    [self.sections removeObjectsAtIndexes:indexes];
+}
+
+- (void)replaceSectionAtIndex:(NSUInteger)index withSection:(HDTableViewSection *)section
+{
+    [self.sections replaceObjectAtIndex:index withObject:section];
+}
+
+- (void)replaceSectionsWithSectionsFromArray:(NSArray *)otherArray
+{
+    [self removeAllSections];
+    [self addSectionsFromArray:otherArray];
+}
+
+- (void)replaceSectionsAtIndexes:(NSIndexSet *)indexes withSections:(NSArray *)sections
+{
+    [self.sections replaceObjectsAtIndexes:indexes withObjects:sections];
+}
+
+- (void)replaceSectionsInRange:(NSRange)range
+         withSectionsFromArray:(NSArray *)otherArray
+                         range:(NSRange)otherRange
+{
+    [self.sections replaceObjectsInRange:range withObjectsFromArray:otherArray range:otherRange];
+}
+
+- (void)replaceSectionsInRange:(NSRange)range withSectionsFromArray:(NSArray *)otherArray
+{
+    [self.sections replaceObjectsInRange:range withObjectsFromArray:otherArray];
+}
+
+- (void)exchangeSectionAtIndex:(NSUInteger)idx1 withSectionAtIndex:(NSUInteger)idx2
+{
+    [self.sections exchangeObjectAtIndex:idx1 withObjectAtIndex:idx2];
+}
+
+- (void)sortSectionsUsingFunction:(NSInteger (*)(id, id, void *))compare context:(void *)context
+{
+    [self.sections sortUsingFunction:compare context:context];
+}
+
+- (void)sortSectionsUsingSelector:(SEL)comparator
+{
+    [self.sections sortUsingSelector:comparator];
+}
+
 @end

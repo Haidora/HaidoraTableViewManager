@@ -24,33 +24,17 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "UITableViewCell+HDTableViewManager_Utils.h"
+
 /**
  UITableViewCell的扩展,方便UITableViewCell的使用
  */
 @interface UITableViewCell (HDTableViewManager)
 
-/**
- Cell对应的tableView
- */
-@property (nonatomic, weak, readwrite) UITableView *hd_tableView;
-
-/**
- Cell对应的indexPath
- */
-@property (nonatomic, strong, readwrite) NSIndexPath *hd_indexPath;
-
 #pragma mark
 #pragma mark Cell Config
-
 /**
- 指定Cell的ReusableIdentifier
-
- @return 默认返回 NSStringFromClass([self class])
- */
-+ (NSString *)hd_ReusableCellIdentifier;
-
-/**
- 配置cell高度
+ 配置UITableViewCell高度
 
  @return 默认44
  */
@@ -64,7 +48,7 @@
 + (CGFloat)hd_cellHeightForTableView:(UITableView *)tableView content:(id)content;
 
 /**
- 用数据配置Cell的UI,可自由发挥
+ 用数据配置Cell的UI,可自由发挥(该方法需要手动调用),写在这里的目的只是为Cell提供一个set方法
  */
 - (void)hd_setContent:(id)content;
 
@@ -85,63 +69,10 @@
 + (UINib *)hd_nib;
 
 #pragma mark
-#pragma mark Load Cell
-
-#pragma mark Load Cell By code
-
-+ (instancetype)hd_cellForTableView:(UITableView *)tableView
-                          withStyle:(UITableViewCellStyle)style
-                          indexPath:(NSIndexPath *)indexPath;
-
-+ (instancetype)hd_cellForTableView:(UITableView *)tableView
-                          withStyle:(UITableViewCellStyle)style
-                         identifier:(NSString *)identifier
-                          indexPath:(NSIndexPath *)indexPath;
-
-+ (instancetype)hd_cellForTableView:(UITableView *)tableView
-                          withStyle:(UITableViewCellStyle)style
-                         identifier:(NSString *)identifier
-                          indexPath:(NSIndexPath *)indexPath
-                     didLoadHandler:(void (^)(UITableView *tableView, id cell,
-                                              NSIndexPath *indexPath))didLoadHandler
-                  willAppearHandler:(void (^)(UITableView *tableView, id cell,
-                                              NSIndexPath *indexPath))willAppearHandler;
-
-#pragma mark Load Cell By nib
-
-+ (instancetype)hd_cellForTableView:(UITableView *)tableView
-                            fromNib:(UINib *)nib
-                          indexPath:(NSIndexPath *)indexPath;
-
-+ (instancetype)hd_cellForTableView:(UITableView *)tableView
-                            fromNib:(UINib *)nib
-                         identifier:(NSString *)identifier
-                          indexPath:(NSIndexPath *)indexPath;
-
-+ (instancetype)hd_cellForTableView:(UITableView *)tableView
-                            fromNib:(UINib *)nib
-                         identifier:(NSString *)identifier
-                          indexPath:(NSIndexPath *)indexPath
-                     didLoadHandler:(void (^)(UITableView *tableView, id cell,
-                                              NSIndexPath *indexPath))didLoadHandler
-                  willAppearHandler:(void (^)(UITableView *tableView, id cell,
-                                              NSIndexPath *indexPath))willAppearHandler;
-
-#pragma mark
 #pragma mark Life Cycle
 
 /**
- cell创建以后调用
- */
-- (void)hd_cellDidLoad __attribute__((objc_requires_super));
-
-/**
- cell显示时调用(cellForRowAtIndexPath)
- */
-- (void)hd_cellWillAppear __attribute__((objc_requires_super));
-
-/**
- *  tableView:willDisplayCell:forRowAtIndexPath:
+ *  @see tableView:willDisplayCell:forRowAtIndexPath:后调用
  */
 - (void)hd_cellWillDisplay __attribute__((objc_requires_super));
 

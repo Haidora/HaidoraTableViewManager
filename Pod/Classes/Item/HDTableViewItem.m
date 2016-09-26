@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "HDTableViewItem.h"
+#import "HDTableViewManager.h"
 
 @implementation HDTableViewItem
 
@@ -65,4 +66,3 @@
 }
 
 @end
-

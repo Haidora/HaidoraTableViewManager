@@ -1,5 +1,5 @@
 //
-//  UITableViewCell+Deprecated.m
+//  UITableViewCell+HDTableViewManager_Utils.h
 //
 // Copyright (c) 2016年 mrdaios
 //
@@ -21,74 +21,111 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "UITableViewCell+Deprecated.h"
-#import "UITableViewCell+HDTableViewManager.h"
-#import <objc/runtime.h>
+#import <UIKit/UIKit.h>
 
-@implementation UITableViewCell (HDTableViewManager_Deprecated)
+/**
+ *  UITableViewCell工具类(主要用于UITableViewCell的创建)
+ */
+@interface UITableViewCell (HDTableViewManager_Utils)
 
-+ (NSString *)hd_cellIdentifier
-{
-    NSAssert(NO, @"用UITableViewCell的hd_ReusableCellIdentifier代替.");
-    return nil;
-}
+/**
+ UITableViewCell对应的UITableView,通过工具方法创建Cell时会绑定
+ */
+@property (nonatomic, weak, readonly) UITableView *hd_tableView;
 
-- (void)setHd_item:(id)hd_item
-{
-    NSAssert(NO, @"已废弃.");
-}
+/**
+ UITableViewCell对应的indexPath,通过工具方法创建Cell时会绑定
+ */
+@property (nonatomic, strong, readonly) NSIndexPath *hd_indexPath;
 
-- (id)hd_item
-{
-    NSAssert(NO, @"已废弃.");
-    return nil;
-}
+#pragma mark
+#pragma mark Cell Config
+
+/**
+ 指定UITableViewCell的ReusableIdentifier
+
+ @return 默认返回 NSStringFromClass([self class])
+ */
++ (NSString *)hd_ReusableCellIdentifier;
+
+#pragma mark
+#pragma mark Load Cell
+
+#pragma mark Load Cell By code
+
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
+                          withStyle:(UITableViewCellStyle)style
+                          indexPath:(NSIndexPath *)indexPath;
 
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
                           withStyle:(UITableViewCellStyle)style
                          identifier:(NSString *)identifier
-                          indexPath:(NSIndexPath *)indexPath
-                               item:(id)item
-{
-    NSAssert(NO, @"已废弃.");
-    return nil;
-}
+                          indexPath:(NSIndexPath *)indexPath;
 
+/**
+ *  工具方法:用于创建UITableViewCell
+ *
+ *  @param tableView
+ *  @param style
+ *  @param identifier
+ *  @param indexPath
+ *  @param didLoadHandler 会在hd_cellDidLoad之前调用
+ *  @param willAppearHandler 会在hd_cellWillAppear之前调用
+ */
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
                           withStyle:(UITableViewCellStyle)style
                          identifier:(NSString *)identifier
                           indexPath:(NSIndexPath *)indexPath
-                               item:(id)item
                      didLoadHandler:(void (^)(UITableView *tableView, id cell,
                                               NSIndexPath *indexPath))didLoadHandler
                   willAppearHandler:(void (^)(UITableView *tableView, id cell,
-                                              NSIndexPath *indexPath))willAppearHandler
-{
-    NSAssert(NO, @"已废弃.");
-    return nil;
-}
+                                              NSIndexPath *indexPath))willAppearHandler;
+
+#pragma mark Load Cell By nib
+
++ (instancetype)hd_cellForTableView:(UITableView *)tableView
+                            fromNib:(UINib *)nib
+                          indexPath:(NSIndexPath *)indexPath;
 
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
                             fromNib:(UINib *)nib
                          identifier:(NSString *)identifier
-                          indexPath:(NSIndexPath *)indexPath
-                               item:(id)item
-{
-    NSAssert(NO, @"已废弃.");
-    return nil;
-}
+                          indexPath:(NSIndexPath *)indexPath;
 
+/**
+ *  工具方法:用于创建UITableViewCell
+ *
+ *  @param tableView
+ *  @param nib
+ *  @param identifier
+ *  @param indexPath
+ *  @param didLoadHandler 会在hd_cellDidLoad之前调用
+ *  @param willAppearHandler 会在hd_cellWillAppear之前调用
+ */
 + (instancetype)hd_cellForTableView:(UITableView *)tableView
                             fromNib:(UINib *)nib
                          identifier:(NSString *)identifier
                           indexPath:(NSIndexPath *)indexPath
-                               item:(id)item
                      didLoadHandler:(void (^)(UITableView *tableView, id cell,
                                               NSIndexPath *indexPath))didLoadHandler
                   willAppearHandler:(void (^)(UITableView *tableView, id cell,
-                                              NSIndexPath *indexPath))willAppearHandler
-{
-    NSAssert(NO, @"已废弃.");
-    return nil;
-}
+                                              NSIndexPath *indexPath))willAppearHandler;
+
+#pragma mark
+#pragma mark Life Cycle
+
+/**
+ UITableViewCell创建以后调用,通过工具方法创建Cell时会调用
+
+ @see (instantiateWithOwner:options:或initWithStyle:reuseIdentifier:)后调用
+ */
+- (void)hd_cellDidLoad __attribute__((objc_requires_super));
+
+/**
+ UITableViewCell复用时调用,通过工具方法创建Cell时会调用
+
+ @see (dequeueReusableCellWithIdentifier:)后调用
+ */
+- (void)hd_cellWillAppear __attribute__((objc_requires_super));
+
 @end

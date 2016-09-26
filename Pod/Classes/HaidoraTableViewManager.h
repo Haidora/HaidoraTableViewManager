@@ -21,18 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef Pods_HaidoraTableViewManager_h
-#define Pods_HaidoraTableViewManager_h
-
-//Manager
+// Manager
 #import "HDTableViewManager.h"
-#import "HDTableViewManager+UITableViewDataSource.h"
-#import "HDTableViewManager+UITableViewDelegate.h"
-//Section
+// Section
 #import "HDTableViewSection.h"
-//Item
+// Item
 #import "HDTableViewItem.h"
-//Cell
+// Cell
 #import "UITableViewCell+HDTableViewManager.h"
-
-#endif

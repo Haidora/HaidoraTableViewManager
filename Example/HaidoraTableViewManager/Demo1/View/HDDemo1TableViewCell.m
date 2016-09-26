@@ -20,8 +20,8 @@
 
 - (void)hd_setContent:(HDDemo1Model *)content
 {
-    _label1.text = content.info1;
-    _label2.text = content.info2;
+//    _label1.text = content.info1;
+//    _label2.text = content.info2;
 }
 
 @end

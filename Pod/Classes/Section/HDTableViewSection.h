@@ -23,14 +23,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "HDTableViewDefines.h"
+#import "HDTableViewSectionProtocol.h"
 
 /**
  Section的配置
  */
-@interface HDTableViewSection
-    : NSObject <HDTableViewConfigureProtocol, HDTableViewCellConfigureProtocol,
-                HDTableViewSectionProtocol>
+@interface HDTableViewSection : NSObject <HDTableViewSectionProtocol>
 
 /**
  内部有初始化,self.items懒加载
