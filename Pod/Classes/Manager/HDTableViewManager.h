@@ -67,7 +67,14 @@ extern const CGFloat HDTableViewManagerCellHeightUnknow;
  */
 @property (nonatomic, weak, readwrite) id<HDTableViewManagerDelegate> delegate;
 
+
 + (instancetype)manager;
+- (instancetype)initWithSections:(NSMutableArray *)sections
+                       cellClass:(Class)cellClass
+                       cellStyle:(UITableViewCellStyle)cellStyle
+              configureCellBlock:(void (^)(id cell, id itemData,
+                                           NSIndexPath *indexPath))cellConfigure
+                        delegate:(id<HDTableViewManagerDelegate>)delegate;
 
 @end
 
