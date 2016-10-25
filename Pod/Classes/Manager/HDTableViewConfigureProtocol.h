@@ -33,6 +33,16 @@
 
 @optional
 /**
+ TableView的tableView:heightForRowAtIndexPath:回调配置加载顺序
+ 
+ item>section>manager
+ 
+ @see tableView:heightForRowAtIndexPath:
+ */
+@property (nonatomic, copy, readwrite) CGFloat (^tableViewHeightForRowAtIndexPath)
+(UITableView *tableView, NSIndexPath *indexPath);
+
+/**
  TableView的tableView:didSelectRowAtIndexPath:回调配置加载顺序
 
  item>section>manager

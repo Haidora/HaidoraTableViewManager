@@ -166,37 +166,69 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
     return cellStyle;
 }
 
+- (CGFloat (^)(UITableView *tableView, NSIndexPath *indexPath))loadTableViewHeightForRowAtIndexPathWith:(NSIndexPath *)indexPath
+{
+    CGFloat (^tableViewHeightForRowAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath) = nil;
+    NSObject<HDTableViewConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewConfigureProtocol)])
+    {
+        tableViewHeightForRowAtIndexPath = tableViewItem.tableViewHeightForRowAtIndexPath;
+    }
+    if (!tableViewHeightForRowAtIndexPath)
+    {
+        NSObject<HDTableViewConfigureProtocol> *tableViewSection =
+        self.sections[indexPath.section];
+        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewConfigureProtocol)])
+        {
+            tableViewHeightForRowAtIndexPath = tableViewSection.tableViewHeightForRowAtIndexPath;
+        }
+    }
+    if (!tableViewHeightForRowAtIndexPath)
+    {
+        tableViewHeightForRowAtIndexPath = self.tableViewHeightForRowAtIndexPath;
+    }
+    return tableViewHeightForRowAtIndexPath;
+}
+
 - (CGFloat)loadCellHeightWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = HDTableViewManagerCellHeightUnknow;
-    NSObject<HDTableViewCellConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
-    if ([tableViewItem conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
+    CGFloat (^tableViewHeightForRowAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath) = [self loadTableViewHeightForRowAtIndexPathWith:indexPath];
+    if (tableViewHeightForRowAtIndexPath)
     {
-        height = tableViewItem.cellHeight;
+        return tableViewHeightForRowAtIndexPath(tableView,indexPath);
     }
-    if (height == HDTableViewManagerCellHeightUnknow)
+    else
     {
-        NSObject<HDTableViewCellConfigureProtocol> *tableViewSection =
-            self.sections[indexPath.section];
-        if ([tableViewSection conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
+        CGFloat height = HDTableViewManagerCellHeightUnknow;
+        NSObject<HDTableViewCellConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
+        if ([tableViewItem conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
         {
-            height = tableViewSection.cellHeight;
+            height = tableViewItem.cellHeight;
         }
-    }
-    if (height == HDTableViewManagerCellHeightUnknow)
-    {
-        height = self.cellHeight;
-    }
-    if (height == HDTableViewManagerCellHeightUnknow)
-    {
-        Class cellClass = [self loadClassWith:indexPath];
-        if ([cellClass isSubclassOfClass:[UITableViewCell class]])
+        if (height == HDTableViewManagerCellHeightUnknow)
         {
-            height = [cellClass hd_cellHeightForTableView:tableView
-                                                  content:[self loadItemDataWith:indexPath]];
+            NSObject<HDTableViewCellConfigureProtocol> *tableViewSection =
+                self.sections[indexPath.section];
+            if ([tableViewSection conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
+            {
+                height = tableViewSection.cellHeight;
+            }
         }
+        if (height == HDTableViewManagerCellHeightUnknow)
+        {
+            height = self.cellHeight;
+        }
+        if (height == HDTableViewManagerCellHeightUnknow)
+        {
+            Class cellClass = [self loadClassWith:indexPath];
+            if ([cellClass isSubclassOfClass:[UITableViewCell class]])
+            {
+                height = [cellClass hd_cellHeightForTableView:tableView
+                                                      content:[self loadItemDataWith:indexPath]];
+            }
+        }
+        return height;
     }
-    return height;
 }
 
 - (void (^)(id cell, id itemData,
