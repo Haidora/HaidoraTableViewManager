@@ -192,14 +192,14 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
 
 - (CGFloat)loadCellHeightWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
+    CGFloat height = HDTableViewManagerCellHeightUnknow;
     CGFloat (^tableViewHeightForRowAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath) = [self loadTableViewHeightForRowAtIndexPathWith:indexPath];
     if (tableViewHeightForRowAtIndexPath)
     {
-        return tableViewHeightForRowAtIndexPath(tableView,indexPath);
+        height = tableViewHeightForRowAtIndexPath(tableView,indexPath);
     }
-    else
+    if (height == HDTableViewManagerCellHeightUnknow)
     {
-        CGFloat height = HDTableViewManagerCellHeightUnknow;
         NSObject<HDTableViewCellConfigureProtocol> *tableViewItem = [self itemAtIndexPath:indexPath];
         if ([tableViewItem conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
         {
@@ -208,7 +208,7 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
         if (height == HDTableViewManagerCellHeightUnknow)
         {
             NSObject<HDTableViewCellConfigureProtocol> *tableViewSection =
-                self.sections[indexPath.section];
+            self.sections[indexPath.section];
             if ([tableViewSection conformsToProtocol:@protocol(HDTableViewCellConfigureProtocol)])
             {
                 height = tableViewSection.cellHeight;
@@ -227,8 +227,8 @@ loadTableViewDidSelectRowAtIndexPathWith:(NSIndexPath *)indexPath
                                                       content:[self loadItemDataWith:indexPath]];
             }
         }
-        return height;
     }
+    return height;
 }
 
 - (void (^)(id cell, id itemData,
