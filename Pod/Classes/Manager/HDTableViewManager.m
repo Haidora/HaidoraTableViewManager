@@ -79,7 +79,7 @@ const CGFloat HDTableViewManagerCellHeightUnknow = NSIntegerMax;
     self = [self init];
     if (self)
     {
-        //        self.sections = sections;
+        self.sections = sections;
         self.cellClass = cellClass;
         self.cellStyle = cellStyle;
         self.cellConfigure = [cellConfigure copy];
