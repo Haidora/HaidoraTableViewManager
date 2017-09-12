@@ -165,8 +165,7 @@
     if ([self.delegate respondsToSelector:@selector(tableView:
                                               titleForDeleteConfirmationButtonForRowAtIndexPath:)])
     {
-        [self.delegate tableView:tableView
-            titleForDeleteConfirmationButtonForRowAtIndexPath:indexPath];
+        titleForDelete = [self.delegate tableView:tableView titleForDeleteConfirmationButtonForRowAtIndexPath:indexPath];
     }
     return titleForDelete;
 }
