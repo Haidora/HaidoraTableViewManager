@@ -75,10 +75,7 @@
         NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[section];
         if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
         {
-            if ([tableViewSection viewForHeader])
-            {
-                height = [tableViewSection heightForHeader];
-            }
+            height = [tableViewSection heightForHeader];
         }
     }
     return height;
@@ -96,10 +93,7 @@
         NSObject<HDTableViewSectionProtocol> *tableViewSection = self.sections[section];
         if ([tableViewSection conformsToProtocol:@protocol(HDTableViewSectionProtocol)])
         {
-            if ([tableViewSection viewForFooter])
-            {
-                height = [tableViewSection heightForFooter];
-            }
+            height = [tableViewSection heightForFooter];
         }
     }
     return height;
