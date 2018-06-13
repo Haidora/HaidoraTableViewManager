@@ -1,10 +1,10 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'HaidoraTableViewManager_Example', :exclusive => true do
+target 'HaidoraTableViewManager_Example' do
   pod "HaidoraTableViewManager", :path => "../"
 end
 
-target 'HaidoraTableViewManager_Tests', :exclusive => true do
+target 'HaidoraTableViewManager_Tests' do
   pod "HaidoraTableViewManager", :path => "../"
 
   

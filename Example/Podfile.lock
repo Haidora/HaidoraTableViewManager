@@ -9,6 +9,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  HaidoraTableViewManager: b93c190085ab7a681302df80271d2ad169b0eb19
+  HaidoraTableViewManager: f03cba076c9d27d04e366c92facdcb2e4a387c6c
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 714fdc5031205a9db464af6ef063d1ffa5036053
+
+COCOAPODS: 1.4.0
